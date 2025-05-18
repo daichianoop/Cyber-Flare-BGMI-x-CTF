@@ -2,15 +2,14 @@
 import Image from "next/image"
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { AlertCircle, Trophy, X } from "lucide-react"
+import { AlertCircle, X } from 'lucide-react'
+import Link from "next/link"
 
-export default function Flag5() {
+export default function Flag4() {
   const [answer, setAnswer] = useState("")
   const [showHint, setShowHint] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
-  const [showCelebration, setShowCelebration] = useState(false)
-  const [confetti, setConfetti] = useState([])
-  const [randomPassword, setRandomPassword] = useState("P@ssw0rd123!")
+  const [gridCells, setGridCells] = useState([])
   const [wrongAttempts, setWrongAttempts] = useState(0)
   const [showWrongMessage, setShowWrongMessage] = useState(false)
   const [showModal, setShowModal] = useState(false)
@@ -18,47 +17,26 @@ export default function Flag5() {
   const containerRef = useRef(null)
 
   useEffect(() => {
-    // Generate animated elements for the background
-    const lines = Array.from({ length: 60 }, (_, i) => ({
-      // Increased count
-      id: i,
-      x1: Math.random() * 100,
-      y1: Math.random() * 100,
-      x2: Math.random() * 100,
-      y2: Math.random() * 100,
-      width: Math.random() * 6 + 2, // Increased width
-      color: i % 3 === 0 ? "#FFF512" : i % 3 === 1 ? "#DE8D00" : "#9C4100",
-      delay: Math.random() * 2,
-      duration: Math.random() * 6 + 3, // Faster animation
-    }))
-    setConfetti(lines)
-
-    // Random password generator with * and # that encodes "i am always there but you need to find me"
-    const message = "i am always there but you need to find me"
-    let position = 0
-
-    const passwordInterval = setInterval(() => {
-      let newPassword = ""
-      for (let i = 0; i < 20; i++) {
-        // Use the current character from the message to determine * or #
-        // * for spaces, # for letters
-        if (position >= message.length) position = 0
-
-        const char = message[position]
-        newPassword += char === " " ? "*" : "#"
-        position++
+    // Generate grid cells for the animated background
+    const cells = []
+    const gridSize = 8 // Larger cells
+    for (let i = 0; i < gridSize; i++) {
+      for (let j = 0; j < gridSize; j++) {
+        cells.push({
+          id: `${i}-${j}`,
+          x: (100 / gridSize) * j,
+          y: (100 / gridSize) * i,
+          delay: Math.random() * 5,
+        })
       }
-      setRandomPassword(newPassword)
-    }, 2000)
-
-    return () => clearInterval(passwordInterval)
+    }
+    setGridCells(cells)
   }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (answer.toLowerCase() === "phishing") {
+    if (answer.toLowerCase() === "sandbox") {
       setIsCorrect(true)
-      setShowCelebration(true)
       // Success animation
       const container = containerRef.current
       if (container) {
@@ -69,7 +47,7 @@ export default function Flag5() {
       }
     } else {
       // Wrong answer
-      setWrongAttempts((prev) => prev + 1)
+      setWrongAttempts(prev => prev + 1)
       setShowWrongMessage(true)
       setShake(true)
       setAnswer("")
@@ -123,124 +101,78 @@ export default function Flag5() {
                 60% { transform: translate(-3px, -3px); }
                 80% { transform: translate(3px, 3px); }
             }
-
-            .celebration {
-                animation: celebrate 1s ease;
-            }
-
-            @keyframes celebrate {
-                0%, 100% { transform: scale(1); }
-                50% { transform: scale(1.05); }
-            }
         `}</style>
 
         <main
-            className={`min-h-screen bg-[#090907] py-10 px-4 relative overflow-hidden ${shake ? "glitch" : ""} ${isCorrect ? "celebration" : ""}`}
+            className={`min-h-screen bg-[#090907] py-10 px-4 relative overflow-hidden ${shake ? 'glitch' : ''}`}
             ref={containerRef}
         >
-          {/* Animated Background */}
+          {/* Animated Grid Background */}
           <div className="absolute inset-0 overflow-hidden">
-            {confetti.map((line) => (
+            {gridCells.map((cell) => (
                 <motion.div
-                    key={line.id}
-                    className="absolute"
+                    key={cell.id}
+                    className="absolute bg-[#FFF512]/30 border-2 border-[#FFF512]/40" // Increased opacity and border
                     style={{
-                      width: "200px", // Increased width
-                      height: `${line.width}px`,
-                      backgroundColor: line.color,
-                      left: `${line.x1}%`,
-                      top: `${line.y1}%`,
-                      transformOrigin: "left center",
-                      opacity: 0.7, // Increased base opacity
+                      width: `${100 / 8}%`, // Larger cells
+                      height: `${100 / 8}%`, // Larger cells
+                      left: `${cell.x}%`,
+                      top: `${cell.y}%`,
                     }}
                     animate={{
-                      left: [`${line.x1}%`, `${line.x2}%`],
-                      top: [`${line.y1}%`, `${line.y2}%`],
-                      opacity: [0.4, 0.9, 0.4], // More opacity variation
+                      opacity: [0.2, 0.6, 0.2], // More opacity variation
+                      scale: [1, 1.2, 1], // More scaling
+                      borderColor: ["rgba(255, 245, 18, 0.4)", "rgba(255, 245, 18, 0.8)", "rgba(255, 245, 18, 0.4)"], // Border animation
                       boxShadow: [
                         "0 0 0px rgba(255, 245, 18, 0)",
-                        "0 0 15px rgba(255, 245, 18, 0.6)",
+                        "0 0 15px rgba(255, 245, 18, 0.3)",
                         "0 0 0px rgba(255, 245, 18, 0)",
                       ], // Added glow
                     }}
                     transition={{
-                      duration: line.duration,
-                      delay: line.delay,
+                      duration: 3, // Faster animation
+                      delay: cell.delay,
                       repeat: Number.POSITIVE_INFINITY,
-                      repeatType: "loop",
+                      repeatType: "reverse",
                     }}
                 />
             ))}
-            <div className="absolute inset-0 bg-[#090907]/70" />
+            <div className="absolute inset-0 bg-[#090907]/50" />
           </div>
-
-          {/* Celebration Animation */}
-          {showCelebration && (
-              <div className="absolute inset-0 z-20 pointer-events-none">
-                {Array.from({ length: 150 }).map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className="absolute w-4 h-4 rounded-full"
-                        style={{
-                          backgroundColor: i % 3 === 0 ? "#FFF512" : i % 3 === 1 ? "#DE8D00" : "#9C4100",
-                          top: "50%",
-                          left: "50%",
-                          boxShadow: `0 0 10px ${i % 3 === 0 ? "#FFF512" : i % 3 === 1 ? "#DE8D00" : "#9C4100"}`,
-                        }}
-                        initial={{ scale: 0 }}
-                        animate={{
-                          scale: [0, 1, 0],
-                          x: [0, (Math.random() - 0.5) * 1000],
-                          y: [0, (Math.random() - 0.5) * 1000],
-                          opacity: [0, 1, 0],
-                        }}
-                        transition={{
-                          duration: 3,
-                          delay: Math.random() * 0.5,
-                          ease: "easeOut",
-                        }}
-                    />
-                ))}
-              </div>
-          )}
 
           <div className="max-w-5xl mx-auto bg-[#1A1A18]/90 p-8 md:p-12 rounded-sm border-2 border-[#FFF512] shadow-[8px_8px_0px_0px_#EBB014] relative z-10">
             <div className="text-center mb-10">
               <div className="flex justify-center mb-2">
                 <span className="text-[#FFF512] text-3xl">&#34;</span>
                 <h1 className="text-xl md:text-2xl text-white font-['New_Rocker',cursive] mx-2">
-                  The most dangerous click might be the one you never suspect.
+                  Security is not a product, but a process.
                 </h1>
                 <span className="text-[#FFF512] text-3xl">&#34;</span>
               </div>
-              <p className="text-[#FFDE40] text-sm font-['Saira',sans-serif]">- Cyber Flare Security Team</p>
+              <p className="text-[#FFDE40] text-sm font-['Saira',sans-serif]">- Bruce Schneier</p>
 
               <div className="w-full h-px bg-[#DE8D00] my-8"></div>
             </div>
 
             <div className="mb-8">
               <h2 className="text-2xl md:text-3xl font-bold text-[#FFF512] mb-4 font-['New_Rocker',cursive]">
-                <motion.span
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7 }}
-                >
+                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
                   <motion.span
                       animate={{
                         textShadow: [
                           "0 0 0px rgba(255, 245, 18, 0)",
-                          "0 0 15px rgba(255, 245, 18, 0.8)",
+                          "0 0 15px rgba(255, 245, 18, 0.6)",
                           "0 0 0px rgba(255, 245, 18, 0)",
                         ],
                       }}
-                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+                      transition={{ duration: 2.5, repeat: Number.POSITIVE_INFINITY }}
                   >
                     Ready for the challenge?
                   </motion.span>
                 </motion.span>
               </h2>
               <p className="text-white mb-2 font-['Saira',sans-serif]">
-                <span className="text-[#FFDE40] font-bold">FLAG [5 of 5]</span>
+                <span className="text-[#FFDE40] font-bold">FLAG [2 of 5]</span>
               </p>
 
               <div className="bg-[#090907] p-6 border-2 border-[#DE8D00] rounded-sm mb-6">
@@ -250,44 +182,34 @@ export default function Flag5() {
                         scale: [1, 1.05, 1],
                         color: ["#FFDE40", "#FFF512", "#FFDE40"],
                       }}
-                      transition={{ duration: 2.5, repeat: Number.POSITIVE_INFINITY }}
+                      transition={{duration: 3, repeat: Number.POSITIVE_INFINITY}}
                   >
                     Riddle:
                   </motion.span>
                 </h3>
                 <p className="text-gray-300 mb-4 font-['Saira',sans-serif] italic">
-                  I cast a net with bait disguised as friends,
-                  <br />A click, a slip—your data meets its end.
-                  <br />
-                  No rod or reel, but hooks in every line,
-                  <br />
-                  What am I, the thief of peace of mind?
+                  A realm confined, yet vast in scope,
+                  <br/>
+                  No grains of sand, but threats I probe.
+                  <br/>
+                  In my walls, both child and code
+                  <br/>
+                  Find safety where freedoms erode.
+                  <br/>
+                  What am I?
                 </p>
 
-                <p className="text-white font-bold mb-4 font-['Saira',sans-serif] text-center">It is always there</p>
-
-                <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm mb-4">
-                  <motion.p
-                      className="text-[#FFF512] font-mono text-center tracking-wider"
-                      animate={{ opacity: [0.7, 1, 0.7] }}
-                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                  >
-                    {randomPassword}
-                  </motion.p>
-                </div>
-
                 <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">Initial Clue:</h4>
-                <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm mb-4">
-                  <p className="text-white font-mono text-center font-['Saira',sans-serif]">
-                    The answer is hidden in plain sight, but sometimes we need to look at things from a different angle.
-                  </p>
-                </div>
-
-                <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">
-                  Still not see it? Here&#39;s another clue:
-                </h4>
+                <p className="text-sm font-['Saira',sans-serif] mb-2">
+                  <span className="font-bold">Decoding Hint:</span> This binary sequence doesn&#39;t use standard ASCII or
+                  UTF-8 encoding. Think of it as a direct representation of the concept. The pattern of 0s and 1s
+                  might
+                  form a visual or conceptual representation of the answer when viewed from a different perspective.
+                </p>
                 <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm">
-                  <p className="text-[#FFF512] font-mono text-center tracking-wider">16 8 9 19 8 9 14 7</p>
+                  <p className="text-[#FFF512] font-mono text-center tracking-wider">
+                    000 01 10 100 1000 111 1001
+                  </p>
                 </div>
               </div>
 
@@ -301,7 +223,7 @@ export default function Flag5() {
                       id="answer"
                       value={answer}
                       onChange={(e) => setAnswer(e.target.value)}
-                      className={`w-full p-3 bg-[#090907] border-2 ${showWrongMessage ? "border-red-500" : "border-[#DE8D00]"} rounded-sm text-white focus:outline-none focus:border-[#FFF512] font-['Saira',sans-serif]`}
+                      className={`w-full p-3 bg-[#090907] border-2 ${showWrongMessage ? 'border-red-500' : 'border-[#DE8D00]'} rounded-sm text-white focus:outline-none focus:border-[#FFF512] font-['Saira',sans-serif]`}
                       placeholder="Enter your answer"
                   />
 
@@ -334,9 +256,12 @@ export default function Flag5() {
                           animate={{ opacity: 1, y: 0 }}
                           className="mt-2 p-3 bg-[#090907] border border-[#DE8D00] rounded-sm text-[#FFDE40] text-sm font-['Saira',sans-serif]"
                       >
-                        The numbers in the clue represent positions in the alphabet (A=1, B=2, etc.). Decode them to reveal
-                        the answer. Think about deceptive emails or messages that trick users into revealing sensitive
-                        information.
+                        Think about environments where code is executed in isolation for security purposes. The binary
+                        stream might be a clue if converted using a special technique. During World War II, encrypted
+                        messages often traveled through the airwaves. These messages played a crucial role in communication,
+                        espionage, and military operations due to their simplicity, reliability, secrecy, and versatility
+                        and was an indispensable tool for military communication, contributing significantly to the success
+                        of Allied forces in various theaters of war.
                       </motion.div>
                   )}
                 </div>
@@ -362,44 +287,18 @@ export default function Flag5() {
                         Submit
                       </motion.button>
                   ) : (
-                      <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer">
+                      <Link href="/Tasks/no5">
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-[#FFF512] text-[#090907] border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#EBB014] hover:shadow-[2px_2px_0px_0px_#EBB014] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 animate-pulse font-['Saira',sans-serif] flex items-center"
+                            className="bg-[#FFF512] text-[#090907] border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#EBB014] hover:shadow-[2px_2px_0px_0px_#EBB014] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 animate-pulse font-['Saira',sans-serif]"
                         >
-                          <Trophy className="mr-2 h-5 w-5" /> SUBMIT ALL FLAGS
+                          Here&#39;s a clue
                         </motion.button>
-                      </a>
+                      </Link>
                   )}
                 </div>
               </form>
-
-              {isCorrect && (
-                  <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="mt-8 p-6 bg-[#090907] border-2 border-[#FFF512] rounded-sm text-center"
-                  >
-                    <h3 className="text-2xl font-bold text-[#FFF512] mb-4 font-['New_Rocker',cursive]">CONGRATULATIONS!</h3>
-                    <p className="text-white mb-4 font-['Saira',sans-serif]">
-                      You&#39;ve successfully completed all 5 flags of the Cyber Flare CTF challenge! Your cybersecurity skills
-                      are impressive.
-                    </p>
-                    <p className="text-[#FFDE40] mb-6 font-['Saira',sans-serif]">
-                      Please submit all the flags you&#39;ve collected in the Google Form to officially complete the challenge.
-                    </p>
-
-                    <a
-                        href="https://forms.google.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center bg-[#DE8D00] text-[#090907] font-bold px-6 py-3 rounded-sm shadow-[4px_4px_0px_0px_#9C4100] hover:shadow-[2px_2px_0px_0px_#9C4100] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 font-['Saira',sans-serif]"
-                    >
-                      Open Google Form <Trophy className="ml-2 h-4 w-4" />
-                    </a>
-                  </motion.div>
-              )}
             </div>
           </div>
 
@@ -428,13 +327,16 @@ export default function Flag5() {
                     <h3 className="text-xl text-[#FFF512] mb-4 font-['New_Rocker',cursive]">Need a better hint?</h3>
 
                     <div className="mb-4 border-2 border-[#DE8D00] rounded-sm overflow-hidden">
-                      <Image height={100} width={100} src="/1.jpg" alt="Hint" className="w-full h-auto" />
+                      <Image height={100} width={100}
+                             src="/1.jpg"
+                             alt="Hint"
+                             className="w-full h-auto"
+                      />
                     </div>
 
                     <p className="text-white mb-4 font-['Saira',sans-serif]">
-                      The numbers in the clue represent positions in the alphabet. For example, 16 is the letter &#39;P&#39;. This
-                      type of cyber attack involves deceptive emails or messages that trick users into revealing sensitive
-                      information.
+                      Think about a controlled environment where code can be executed safely without affecting the rest of
+                      the system. It&#39;s like a protected area where potentially dangerous operations can be contained.
                     </p>
 
                     <div className="text-center">

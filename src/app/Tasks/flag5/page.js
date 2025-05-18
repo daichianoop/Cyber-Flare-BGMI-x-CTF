@@ -264,22 +264,11 @@ export default function Flag5() {
                   What am I, the thief of peace of mind?
                 </p>
 
-                <p className="text-white font-bold mb-4 font-['Saira',sans-serif] text-center">It is always there</p>
-
-                <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm mb-4">
-                  <motion.p
-                      className="text-[#FFF512] font-mono text-center tracking-wider"
-                      animate={{ opacity: [0.7, 1, 0.7] }}
-                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                  >
-                    {randomPassword}
-                  </motion.p>
-                </div>
 
                 <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">Initial Clue:</h4>
                 <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm mb-4">
                   <p className="text-white font-mono text-center font-['Saira',sans-serif]">
-                    The answer is hidden in plain sight, but sometimes we need to look at things from a different angle.
+                    16 8 9 19 8 9 14 7
                   </p>
                 </div>
 
@@ -287,7 +276,7 @@ export default function Flag5() {
                   Still not see it? Here&#39;s another clue:
                 </h4>
                 <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm">
-                  <p className="text-[#FFF512] font-mono text-center tracking-wider">16 8 9 19 8 9 14 7</p>
+                  <p className="text-[#FFF512] font-mono text-center tracking-wider">  The answer is hidden in plain sight, but sometimes we need to look at things from a different angle.</p>
                 </div>
               </div>
 
