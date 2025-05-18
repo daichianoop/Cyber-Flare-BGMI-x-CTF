@@ -1,5 +1,5 @@
 "use client"
-
+import Image from "next/image"
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { AlertCircle, Trophy, X } from "lucide-react"
@@ -428,7 +428,7 @@ export default function Flag5() {
                     <h3 className="text-xl text-[#FFF512] mb-4 font-['New_Rocker',cursive]">Need a better hint?</h3>
 
                     <div className="mb-4 border-2 border-[#DE8D00] rounded-sm overflow-hidden">
-                      <img src="/placeholder.svg?height=300&width=400" alt="Hint" className="w-full h-auto" />
+                      <Image height={100} width={100} src="/1.jpg" alt="Hint" className="w-full h-auto" />
                     </div>
 
                     <p className="text-white mb-4 font-['Saira',sans-serif]">

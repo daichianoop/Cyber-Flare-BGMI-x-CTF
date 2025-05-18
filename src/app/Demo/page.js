@@ -76,7 +76,7 @@ export default function Demo() {
           <div className="max-w-4xl mx-auto bg-[#1A1A18]/90 p-8 md:p-12 rounded-sm border-2 border-[#FFF512] shadow-[8px_8px_0px_0px_#EBB014] relative z-10">
             <div className="text-center mb-10">
               <div className="flex justify-center mb-2">
-                <span className="text-[#FFF512] text-3xl">"</span>
+                <span className="text-[#FFF512] text-3xl">&#34;</span>
                 <motion.h1
                     className="text-xl md:text-2xl text-white font-['New_Rocker',cursive] mx-2"
                     animate={{
@@ -90,7 +90,7 @@ export default function Demo() {
                 >
                   Collect all flags to complete the Cyber Flare CTF challenge
                 </motion.h1>
-                <span className="text-[#FFF512] text-3xl">"</span>
+                <span className="text-[#FFF512] text-3xl">&#34;</span>
               </div>
               <p className="text-[#FFDE40] text-sm font-['Saira',sans-serif]">- Cyber Flare CTF Demo</p>
 

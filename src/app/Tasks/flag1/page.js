@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Download, AlertCircle, X } from 'lucide-react'
 import Link from "next/link"
+import Image from "next/image"
 
 export default function Flag1() {
   const [answer, setAnswer] = useState("")
@@ -298,8 +299,8 @@ export default function Flag1() {
                     <h3 className="text-xl text-[#FFF512] mb-4 font-['New_Rocker',cursive]">Need a better hint?</h3>
 
                     <div className="mb-4 border-2 border-[#DE8D00] rounded-sm overflow-hidden">
-                      <img
-                          src="/placeholder.svg?height=300&width=400"
+                      <Image height={100} width={100}
+                          src="/1.jpg"
                           alt="Hint"
                           className="w-full h-auto"
                       />
