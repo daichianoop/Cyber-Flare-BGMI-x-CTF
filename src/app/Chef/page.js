@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Instagram, Linkedin, X } from "lucide-react"
+import { X } from "lucide-react"
 import Image from "next/image"
 
 const teamMembers = [
@@ -62,7 +62,7 @@ export default function Chef() {
   return (
       <>
         {/* Google Fonts Import */}
-        <style jsx global>{`
+        <style>{`
         @import url('https://fonts.googleapis.com/css2?family=New+Rocker&family=Saira:wght@400;600;700;800&display=swap');
       `}</style>
 
@@ -206,8 +206,6 @@ function TeamMemberCard({ member, index }) {
                       className="absolute inset-0 bg-[#090907]/80 flex items-center justify-center gap-4"
                   >
                     {[
-                      { icon: <Instagram size={24} />, color: "hover:bg-pink-600" },
-                      { icon: <Linkedin size={24} />, color: "hover:bg-blue-600" },
                       { icon: <X size={24} />, color: "hover:bg-black" },
                     ].map((social, socialIndex) => (
                         <motion.a

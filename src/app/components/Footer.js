@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Instagram, Linkedin, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import Image from "next/image"
 
 export default function Footer() {
@@ -66,9 +66,9 @@ export default function Footer() {
                     className="flex space-x-4"
                 >
                   {[
-                    { icon: <Instagram size={20} />, href: "#", color: "hover:bg-pink-600" },
+
                     { icon: <X size={20} />, href: "#", color: "hover:bg-white" },
-                    { icon: <Linkedin size={20} />, href: "#", color: "hover:bg-blue-600" },
+
                   ].map((social, index) => (
                       <motion.a
                           key={index}
