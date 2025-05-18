@@ -164,12 +164,19 @@ export default function Flag1() {
 
             <div className="mb-8">
               <h2 className="text-2xl md:text-3xl font-bold text-[#FFF512] mb-4 font-['New_Rocker',cursive]">
-                <motion.span
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                >
-                  Ready for the challenge?
+                <motion.span initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.8}}>
+                  <motion.span
+                      animate={{
+                        textShadow: [
+                          "0 0 0px rgba(255, 245, 18, 0)",
+                          "0 0 15px rgba(255, 245, 18, 0.6)",
+                          "0 0 0px rgba(255, 245, 18, 0)",
+                        ],
+                      }}
+                      transition={{duration: 2.5, repeat: Number.POSITIVE_INFINITY}}
+                  >
+                    Ready for the challenge?
+                  </motion.span>
                 </motion.span>
               </h2>
               <p className="text-white mb-2 font-['Saira',sans-serif]">
@@ -181,11 +188,11 @@ export default function Flag1() {
               </p>
 
               <motion.button
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{scale: 1.02, y: -2}}
+                  whileTap={{scale: 0.98}}
                   className="bg-[#1A1A18] text-[#FFF512] border-2 border-[#DE8D00] font-bold px-6 py-3 rounded-sm shadow-[4px_4px_0px_0px_#9C4100] hover:shadow-[2px_2px_0px_0px_#9C4100] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 flex items-center justify-center mb-8 font-['Saira',sans-serif]"
               >
-                <Download className="mr-2 h-5 w-5" />
+                <Download className="mr-2 h-5 w-5"/>
                 Download web_activity.log
               </motion.button>
 
@@ -207,9 +214,9 @@ export default function Flag1() {
                   <AnimatePresence>
                     {showWrongMessage && (
                         <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0 }}
+                            initial={{opacity: 0, y: 10}}
+                            animate={{opacity: 1, y: 0}}
+                            exit={{opacity: 0}}
                             className="absolute left-0 -bottom-6 text-red-500 text-sm font-['Saira',sans-serif]"
                         >
                           Wrong answer. Try again!
@@ -224,15 +231,16 @@ export default function Flag1() {
                       onClick={() => setShowHint(!showHint)}
                       className="text-[#DE8D00] flex items-center text-sm font-['Saira',sans-serif] hover:text-[#FFF512] transition-colors"
                   >
-                    <AlertCircle className="h-4 w-4 mr-1" /> Hint
+                    <AlertCircle className="h-4 w-4 mr-1"/> Hint
                   </button>
                   {showHint && (
                       <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
+                          initial={{opacity: 0, y: -10}}
+                          animate={{opacity: 1, y: 0}}
                           className="mt-2 p-3 bg-[#090907] border border-[#DE8D00] rounded-sm text-[#FFDE40] text-sm font-['Saira',sans-serif]"
                       >
-                        Look for unusual access patterns or login times that don&#39;t match normal user behavior. Check for
+                        Look for unusual access patterns or login times that don&#39;t match normal user behavior. Check
+                        for
                         failed login attempts followed by successful ones.
                       </motion.div>
                   )}
@@ -242,8 +250,8 @@ export default function Flag1() {
                   <motion.button
                       type="button"
                       onClick={handleReset}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={{scale: 1.05}}
+                      whileTap={{scale: 0.95}}
                       className="bg-[#1A1A18] text-white border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#9C4100] hover:shadow-[2px_2px_0px_0px_#9C4100] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 font-['Saira',sans-serif]"
                   >
                     Reset
@@ -252,8 +260,8 @@ export default function Flag1() {
                   {!isCorrect ? (
                       <motion.button
                           type="submit"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                          whileHover={{scale: 1.05}}
+                          whileTap={{scale: 0.95}}
                           className="bg-[#1A1A18] text-white border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#9C4100] hover:shadow-[2px_2px_0px_0px_#9C4100] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 font-['Saira',sans-serif]"
                       >
                         Submit
@@ -261,8 +269,8 @@ export default function Flag1() {
                   ) : (
                       <Link href="/Tasks/no2">
                         <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            whileHover={{scale: 1.05}}
+                            whileTap={{scale: 0.95}}
                             className="bg-[#FFF512] text-[#090907] border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#EBB014] hover:shadow-[2px_2px_0px_0px_#EBB014] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 animate-pulse font-['Saira',sans-serif]"
                         >
                           Here&#39;s a clue
@@ -278,15 +286,15 @@ export default function Flag1() {
           <AnimatePresence>
             {showModal && (
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    exit={{opacity: 0}}
                     className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
                 >
                   <motion.div
-                      initial={{ scale: 0.8, y: 20 }}
-                      animate={{ scale: 1, y: 0 }}
-                      exit={{ scale: 0.8, y: 20 }}
+                      initial={{scale: 0.8, y: 20}}
+                      animate={{scale: 1, y: 0}}
+                      exit={{scale: 0.8, y: 20}}
                       className="bg-[#1A1A18] p-6 rounded-sm border-2 border-[#FFF512] max-w-md w-full relative"
                   >
                     <button

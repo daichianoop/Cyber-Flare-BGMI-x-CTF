@@ -5,11 +5,11 @@ import { motion, AnimatePresence } from "framer-motion"
 import { AlertCircle, X } from 'lucide-react'
 import Link from "next/link"
 
-export default function Flag4() {
+export default function Flag2() {
   const [answer, setAnswer] = useState("")
   const [showHint, setShowHint] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
-  const [gridCells, setGridCells] = useState([])
+  const [hexagons, setHexagons] = useState([])
   const [wrongAttempts, setWrongAttempts] = useState(0)
   const [showWrongMessage, setShowWrongMessage] = useState(false)
   const [showModal, setShowModal] = useState(false)
@@ -17,20 +17,17 @@ export default function Flag4() {
   const containerRef = useRef(null)
 
   useEffect(() => {
-    // Generate grid cells for the animated background
-    const cells = []
-    const gridSize = 8 // Larger cells
-    for (let i = 0; i < gridSize; i++) {
-      for (let j = 0; j < gridSize; j++) {
-        cells.push({
-          id: `${i}-${j}`,
-          x: (100 / gridSize) * j,
-          y: (100 / gridSize) * i,
-          delay: Math.random() * 5,
-        })
-      }
-    }
-    setGridCells(cells)
+    // Generate hexagons for the animated background
+    const newHexagons = Array.from({ length: 60 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 120 + 80,
+      rotation: Math.random() * 360,
+      color: i % 3 === 0 ? "#FFF512" : i % 3 === 1 ? "#DE8D00" : "#9C4100",
+      delay: Math.random() * 5,
+    }))
+    setHexagons(newHexagons)
   }, [])
 
   const handleSubmit = (e) => {
@@ -77,7 +74,6 @@ export default function Flag4() {
 
   return (
       <>
-        {/* Google Fonts Import */}
         <style jsx global>{`
             @import url('https://fonts.googleapis.com/css2?family=New+Rocker&family=Saira:wght@400;600;700;800&display=swap');
 
@@ -107,35 +103,41 @@ export default function Flag4() {
             className={`min-h-screen bg-[#090907] py-10 px-4 relative overflow-hidden ${shake ? 'glitch' : ''}`}
             ref={containerRef}
         >
-          {/* Animated Grid Background */}
+          {/* Animated Hexagon Background */}
           <div className="absolute inset-0 overflow-hidden">
-            {gridCells.map((cell) => (
+            {hexagons.map((hexagon) => (
                 <motion.div
-                    key={cell.id}
-                    className="absolute bg-[#FFF512]/30 border-2 border-[#FFF512]/40" // Increased opacity and border
+                    key={hexagon.id}
+                    className="absolute opacity-30"
                     style={{
-                      width: `${100 / 8}%`, // Larger cells
-                      height: `${100 / 8}%`, // Larger cells
-                      left: `${cell.x}%`,
-                      top: `${cell.y}%`,
+                      left: `${hexagon.x}%`,
+                      top: `${hexagon.y}%`,
+                      width: `${hexagon.size}px`,
+                      height: `${hexagon.size}px`,
+                      filter: "blur(5px)",
                     }}
+                    initial={{ opacity: 0 }}
                     animate={{
-                      opacity: [0.2, 0.6, 0.2], // More opacity variation
-                      scale: [1, 1.2, 1], // More scaling
-                      borderColor: ["rgba(255, 245, 18, 0.4)", "rgba(255, 245, 18, 0.8)", "rgba(255, 245, 18, 0.4)"], // Border animation
-                      boxShadow: [
-                        "0 0 0px rgba(255, 245, 18, 0)",
-                        "0 0 15px rgba(255, 245, 18, 0.3)",
-                        "0 0 0px rgba(255, 245, 18, 0)",
-                      ], // Added glow
+                      opacity: [0.2, 0.4, 0.2],
+                      rotate: [hexagon.rotation, hexagon.rotation + 360],
+                      scale: [1, 1.4, 1],
                     }}
                     transition={{
-                      duration: 3, // Faster animation
-                      delay: cell.delay,
+                      duration: 8,
+                      delay: hexagon.delay,
                       repeat: Number.POSITIVE_INFINITY,
-                      repeatType: "reverse",
+                      repeatType: "loop",
                     }}
-                />
+                >
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <polygon
+                        points="50 0, 93.3 25, 93.3 75, 50 100, 6.7 75, 6.7 25"
+                        fill="none"
+                        stroke={hexagon.color}
+                        strokeWidth="2"
+                    />
+                  </svg>
+                </motion.div>
             ))}
             <div className="absolute inset-0 bg-[#090907]/50" />
           </div>
@@ -150,25 +152,22 @@ export default function Flag4() {
                 <span className="text-[#FFF512] text-3xl">&#34;</span>
               </div>
               <p className="text-[#FFDE40] text-sm font-['Saira',sans-serif]">- Bruce Schneier</p>
-
               <div className="w-full h-px bg-[#DE8D00] my-8"></div>
             </div>
 
             <div className="mb-8">
               <h2 className="text-2xl md:text-3xl font-bold text-[#FFF512] mb-4 font-['New_Rocker',cursive]">
-                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
-                  <motion.span
-                      animate={{
-                        textShadow: [
-                          "0 0 0px rgba(255, 245, 18, 0)",
-                          "0 0 15px rgba(255, 245, 18, 0.6)",
-                          "0 0 0px rgba(255, 245, 18, 0)",
-                        ],
-                      }}
-                      transition={{ duration: 2.5, repeat: Number.POSITIVE_INFINITY }}
-                  >
-                    Ready for the challenge?
-                  </motion.span>
+                <motion.span
+                    animate={{
+                      textShadow: [
+                        "0 0 0px rgba(255, 245, 18, 0)",
+                        "0 0 15px rgba(255, 245, 18, 0.6)",
+                        "0 0 0px rgba(255, 245, 18, 0)",
+                      ],
+                    }}
+                    transition={{ duration: 2.5, repeat: Number.POSITIVE_INFINITY }}
+                >
+                  Ready for the challenge?
                 </motion.span>
               </h2>
               <p className="text-white mb-2 font-['Saira',sans-serif]">
@@ -182,33 +181,33 @@ export default function Flag4() {
                         scale: [1, 1.05, 1],
                         color: ["#FFDE40", "#FFF512", "#FFDE40"],
                       }}
-                      transition={{duration: 3, repeat: Number.POSITIVE_INFINITY}}
+                      transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
                   >
                     Riddle:
                   </motion.span>
                 </h3>
                 <p className="text-gray-300 mb-4 font-['Saira',sans-serif] italic">
                   A realm confined, yet vast in scope,
-                  <br/>
+                  <br />
                   No grains of sand, but threats I probe.
-                  <br/>
+                  <br />
                   In my walls, both child and code
-                  <br/>
+                  <br />
                   Find safety where freedoms erode.
-                  <br/>
+                  <br />
                   What am I?
                 </p>
 
                 <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">Initial Clue:</h4>
-                <p className="text-sm font-['Saira',sans-serif] mb-2">
-                  <span className="font-bold">Decoding Hint:</span> This binary sequence doesn&#39;t use standard ASCII or
-                  UTF-8 encoding. Think of it as a direct representation of the concept. The pattern of 0s and 1s
-                  might
-                  form a visual or conceptual representation of the answer when viewed from a different perspective.
-                </p>
-                <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm">
+                <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm mb-4">
                   <p className="text-[#FFF512] font-mono text-center tracking-wider">
                     000 01 10 100 1000 111 1001
+                  </p>
+                </div>
+                <div className="p-3 bg-[#1A1A18] border border-[#DE8D00] rounded-sm">
+                  <p className="text-[#FFDE40] font-mono text-sm font-['Saira',sans-serif]">
+                    <span className="font-bold">Decoding Hint:</span> This binary sequence doesn&#39;t use standard ASCII or
+                    UTF-8 encoding. Think of it as a direct representation of the concept.
                   </p>
                 </div>
               </div>
@@ -223,11 +222,10 @@ export default function Flag4() {
                       id="answer"
                       value={answer}
                       onChange={(e) => setAnswer(e.target.value)}
-                      className={`w-full p-3 bg-[#090907] border-2 ${showWrongMessage ? 'border-red-500' : 'border-[#DE8D00]'} rounded-sm text-white focus:outline-none focus:border-[#FFF512] font-['Saira',sans-serif]`}
+                      className={`w-full p-3 bg-[#090907] border-2 ${showWrongMessage ? "border-red-500" : "border-[#DE8D00]"} rounded-sm text-white focus:outline-none focus:border-[#FFF512] font-['Saira',sans-serif]`}
                       placeholder="Enter your answer"
                   />
 
-                  {/* Wrong answer message */}
                   <AnimatePresence>
                     {showWrongMessage && (
                         <motion.div
@@ -256,12 +254,7 @@ export default function Flag4() {
                           animate={{ opacity: 1, y: 0 }}
                           className="mt-2 p-3 bg-[#090907] border border-[#DE8D00] rounded-sm text-[#FFDE40] text-sm font-['Saira',sans-serif]"
                       >
-                        Think about environments where code is executed in isolation for security purposes. The binary
-                        stream might be a clue if converted using a special technique. During World War II, encrypted
-                        messages often traveled through the airwaves. These messages played a crucial role in communication,
-                        espionage, and military operations due to their simplicity, reliability, secrecy, and versatility
-                        and was an indispensable tool for military communication, contributing significantly to the success
-                        of Allied forces in various theaters of war.
+                        Think about environments where code is executed in isolation for security purposes.
                       </motion.div>
                   )}
                 </div>
@@ -302,7 +295,6 @@ export default function Flag4() {
             </div>
           </div>
 
-          {/* Modal after 5 wrong attempts */}
           <AnimatePresence>
             {showModal && (
                 <motion.div
@@ -325,20 +317,18 @@ export default function Flag4() {
                     </button>
 
                     <h3 className="text-xl text-[#FFF512] mb-4 font-['New_Rocker',cursive]">Need a better hint?</h3>
-
                     <div className="mb-4 border-2 border-[#DE8D00] rounded-sm overflow-hidden">
-                      <Image height={100} width={100}
-                             src="/1.jpg"
-                             alt="Hint"
-                             className="w-full h-auto"
+                      <Image
+                          height={300}
+                          width={400}
+                          src="/1.jpg"
+                          alt="Hint"
+                          className="w-full h-auto"
                       />
                     </div>
-
                     <p className="text-white mb-4 font-['Saira',sans-serif]">
-                      Think about a controlled environment where code can be executed safely without affecting the rest of
-                      the system. It&#39;s like a protected area where potentially dangerous operations can be contained.
+                      Think about a controlled environment where code can be executed safely.
                     </p>
-
                     <div className="text-center">
                       <motion.button
                           whileHover={{ scale: 1.05 }}
