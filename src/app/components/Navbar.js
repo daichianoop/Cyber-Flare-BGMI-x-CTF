@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useState, useEffect } from "react"
-import { Menu, X } from 'lucide-react'
+import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 
@@ -16,10 +16,8 @@ export default function Navbar() {
     seconds: 0,
   })
 
-  // Set a future date for the event (example: 30 days from now)
   useEffect(() => {
-    const targetDate = new Date()
-    targetDate.setDate(targetDate.getDate() + 13)
+    const targetDate = new Date("2025-05-31T16:00:00") // May 31st, 2025 at 4:00 PM
 
     const interval = setInterval(() => {
       const now = new Date()
@@ -27,6 +25,7 @@ export default function Navbar() {
 
       if (difference <= 0) {
         clearInterval(interval)
+        setTimer({ days: 0, hours: 0, minutes: 0, seconds: 0 })
         return
       }
 
@@ -51,8 +50,8 @@ export default function Navbar() {
       <>
         {/* Google Fonts Import */}
         <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=New+Rocker&family=Saira:wght@400;600;700;800&display=swap');
-      `}</style>
+            @import url('https://fonts.googleapis.com/css2?family=New+Rocker&family=Saira:wght@400;600;700;800&display=swap');
+        `}</style>
 
         <header
             className={`${scrolled ? "bg-[#090907]/95 backdrop-blur-sm" : "bg-[#090907]"} text-white sticky top-0 z-50 transition-all duration-300`}
@@ -60,15 +59,15 @@ export default function Navbar() {
           {/* Compact Countdown Timer */}
           <div className="bg-[#FFF512] text-[#090907] py-0.5 px-2 text-center font-bold">
             <div className="flex justify-center items-center gap-2 text-xs">
-              <span>EVENT BEGINS:</span>
+              <span>EVENT STARTS:</span>
               <div className="flex gap-1">
-                <span className="font-mono">{timer.days.toString().padStart(2, "0")}D</span>
+                <span className="font-mono uppercase">{timer.days.toString().padStart(2, "0")}d</span>
                 <span>:</span>
-                <span className="font-mono">{timer.hours.toString().padStart(2, "0")}H</span>
+                <span className="font-mono uppercase">{timer.hours.toString().padStart(2, "0")}h</span>
                 <span>:</span>
-                <span className="font-mono">{timer.minutes.toString().padStart(2, "0")}M</span>
+                <span className="font-mono uppercase">{timer.minutes.toString().padStart(2, "0")}m</span>
                 <span>:</span>
-                <span className="font-mono">{timer.seconds.toString().padStart(2, "0")}S</span>
+                <span className="font-mono uppercase">{timer.seconds.toString().padStart(2, "0")}s</span>
               </div>
             </div>
           </div>
@@ -84,7 +83,7 @@ export default function Navbar() {
               >
                 <Image src="/logo.png" alt="Cyber Flare Logo" width={180} height={180} />
                 <motion.div
-                    className="absolute -bottom-1 -right-1 bg-[#FFF512] h-2 w-2"
+                    className="absolute -bottom-1 -right-1 bg-[#FFF512] h-3 w-3"
                     animate={{
                       scale: [1, 1.2, 1],
                       rotate: [0, 5, 0, -5, 0],
@@ -131,38 +130,38 @@ export default function Navbar() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/Tasks/flag1" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
+                  <Link href="/Locked" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
                     Flag 1
                     <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-[#FFF512] group-hover:w-full transition-all duration-300 block" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/Tasks/flag2" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
+                  <Link href="/Locked" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
                     Flag 2
                     <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-[#FFF512] group-hover:w-full transition-all duration-300 block" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/Tasks/flag3" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
+                  <Link href="/Locked" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
                     Flag 3
                     <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-[#FFF512] group-hover:w-full transition-all duration-300 block" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/Tasks/flag4" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
+                  <Link href="/Locked" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
                     Flag 4
                     <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-[#FFF512] group-hover:w-full transition-all duration-300 block" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/Tasks/flag5" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
+                  <Link href="/Locked" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
                     Flag 5
                     <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-[#FFF512] group-hover:w-full transition-all duration-300 block" />
                   </Link>
                 </li>
                 <li>
                   <Link href="/Chef" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
-                    Our Team
+                   Our Team
                     <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-[#FFF512] group-hover:w-full transition-all duration-300 block" />
                   </Link>
                 </li>
@@ -175,7 +174,7 @@ export default function Navbar() {
                 whileTap={{ scale: 0.95 }}
                 className="hidden md:flex items-center bg-[#FFF512] text-[#090907] font-extrabold px-5 py-2 rounded-sm shadow-[4px_4px_0px_0px_#EBB014] hover:shadow-[2px_2px_0px_0px_#EBB014] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 font-['Saira',sans-serif]"
             >
-              REGISTER NOW
+              <Link href={"https://forms.gle/Y3URDGjK4UwhwFC98"}>REGISTER NOW</Link>
               <motion.div
                   animate={{ x: [0, 5, 0] }}
                   transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5, repeatType: "reverse" }}
@@ -212,33 +211,33 @@ export default function Navbar() {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/Tasks/flag1" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
+                      <Link href="/Locked" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
                         Flag 1
                       </Link>
                     </li>
                     <li>
-                      <Link href="/Tasks/flag2" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
+                      <Link href="/Locked" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
                         Flag 2
                       </Link>
                     </li>
                     <li>
-                      <Link href="/Tasks/flag3" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
+                      <Link href="/Locked" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
                         Flag 3
                       </Link>
                     </li>
                     <li>
-                      <Link href="/Tasks/flag4" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
+                      <Link href="/Locked" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
                         Flag 4
                       </Link>
                     </li>
                     <li>
-                      <Link href="/Tasks/flag5" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
+                      <Link href="/Locked" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
                         Flag 5
                       </Link>
                     </li>
                     <li>
                       <Link href="/Chef" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
-                        Our Team
+                       Our Team
                       </Link>
                     </li>
                   </ul>
@@ -248,7 +247,7 @@ export default function Navbar() {
                       whileTap={{ scale: 0.98 }}
                       className="w-full bg-[#FFF512] text-[#090907] font-extrabold px-4 py-3 mt-2 rounded-sm shadow-[4px_4px_0px_0px_#EBB014] hover:shadow-[2px_2px_0px_0px_#EBB014] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 flex justify-center items-center"
                   >
-                    REGISTER NOW
+                    <Link href={"https://forms.gle/Y3URDGjK4UwhwFC98"}>REGISTER NOW</Link>
                     <motion.span
                         animate={{ x: [0, 5, 0] }}
                         transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5, repeatType: "reverse" }}

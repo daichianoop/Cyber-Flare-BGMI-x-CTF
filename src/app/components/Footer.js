@@ -1,22 +1,31 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { X } from 'lucide-react'
 import Image from "next/image"
 
 export default function Footer() {
   const footerLinks = [
     {
       title: "EVENT",
-      links: ["Register", "Rules", "Schedule", "Prizes"],
+      links: [
+        { name: "Register", href: "https://docs.google.com/forms/d/e/1FAIpQLSe95xSVEXq1rJThoQ24po8j4agITcGTKY7vFQoI8fah0yF94g/viewform" },
+        { name: "Rules", href: "/Terms" },
+        { name: "Schedule", href: "https://www.instagram.com/cpc_kiit/" },
+      ],
     },
     {
       title: "SUPPORT",
-      links: ["FAQ", "Contact Us", "Report Issue", "Terms of Service"],
+      links: [
+        { name: "Demo", href: "/Demo" },
+        { name: "Terms of Service", href: "/Terms" },
+      ],
     },
     {
       title: "COMMUNITY",
-      links: ["Discord", "Forums", "Social Media", "Events"],
+      links: [
+        { name: "Discord", href: "https://discord.gg/cyberflare" },
+        { name: "Whatsapp", href: "https://chat.whatsapp.com/KLX8wnrxpYn7EJxZvE42SD" },
+      ],
     },
   ]
 
@@ -24,8 +33,8 @@ export default function Footer() {
       <>
         {/* Google Fonts Import */}
         <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=New+Rocker&family=Saira:wght@400;600;700;800&display=swap');
-      `}</style>
+            @import url('https://fonts.googleapis.com/css2?family=New+Rocker&family=Saira:wght@400;600;700;800&display=swap');
+        `}</style>
 
         <footer className="bg-[#090907] text-white border-t-4 border-[#DE8D00]">
           <div className="max-w-7xl mx-auto px-4 py-12">
@@ -44,8 +53,12 @@ export default function Footer() {
                     <div className="absolute -bottom-1 -right-1 bg-[#FFF512] h-2 w-2" />
                   </div>
                   <div>
-                    <h2 className="font-extrabold text-xl tracking-wider text-[#FFF512] font-['New_Rocker',cursive]">CYBER FLARE</h2>
-                    <p className="text-xs tracking-widest -mt-1 text-[#FFDE40] font-['Saira',sans-serif]">BGMI × CTF EVENT</p>
+                    <h2 className="font-extrabold text-xl tracking-wider text-[#FFF512] font-['New_Rocker',cursive]">
+                      CYBER FLARE
+                    </h2>
+                    <p className="text-xs tracking-widest -mt-1 text-[#FFDE40] font-['Saira',sans-serif]">
+                      BGMI × CTF EVENT
+                    </p>
                   </div>
                 </motion.div>
                 <motion.p
@@ -65,21 +78,29 @@ export default function Footer() {
                     transition={{ delay: 0.2, duration: 0.5 }}
                     className="flex space-x-4"
                 >
-                  {[
+                  {/* LinkedIn */}
+                  <motion.a
+                      href="https://www.linkedin.com/company/cpc-kiit/posts/?feedView=all"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="bg-[#FFF512] border border-[#DE8D00] w-10 h-10 flex items-center justify-center rounded-sm text-[#FFF512] hover:bg-blue-600 hover:text-white transition-all duration-300"
+                  >
+                    <Image src="/linkedin.png" alt="LinkedIn" width={20} height={20} />
+                  </motion.a>
 
-                    { icon: <X size={20} />, href: "#", color: "hover:bg-white" },
-
-                  ].map((social, index) => (
-                      <motion.a
-                          key={index}
-                          href={social.href}
-                          whileHover={{ scale: 1.1, y: -2 }}
-                          whileTap={{ scale: 0.9 }}
-                          className={`bg-[#1A1A18] border border-[#DE8D00] w-10 h-10 flex items-center justify-center rounded-sm text-[#FFF512] ${social.color} hover:text-[#090907] transition-colors duration-300`}
-                      >
-                        {social.icon}
-                      </motion.a>
-                  ))}
+                  {/* Instagram */}
+                  <motion.a
+                      href="https://www.instagram.com/cpc_kiit/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="bg-[#FFF512] border border-[#DE8D00] w-10 h-10 flex items-center justify-center rounded-sm text-[#FFF512] hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:text-white transition-all duration-300"
+                  >
+                    <Image src="/instagram.png" alt="Instagram" width={20} height={20} />
+                  </motion.a>
                 </motion.div>
               </div>
 
@@ -100,12 +121,14 @@ export default function Footer() {
                       {section.links.map((link, linkIndex) => (
                           <li key={linkIndex}>
                             <motion.a
-                                href="#"
+                                href={link.href}
+                                target={link.href.startsWith("http") ? "_blank" : "_self"}
+                                rel={link.href.startsWith("http") ? "noopener noreferrer" : ""}
                                 className="text-gray-300 hover:text-[#FFF512] transition-colors duration-300 flex items-center group"
                                 whileHover={{ x: 5 }}
                             >
                               <span className="w-0 h-0.5 bg-[#FFF512] mr-0 group-hover:w-2 group-hover:mr-2 transition-all duration-300"></span>
-                              {link}
+                              {link.name}
                             </motion.a>
                           </li>
                       ))}
@@ -122,7 +145,7 @@ export default function Footer() {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="border-t border-[#DE8D00]/30 mt-12 pt-6 text-center text-gray-400 font-['Saira',sans-serif]"
             >
-              <p className={"animate-pulse"}>© 2025 CYBER FLARE - BGMI × CTF EVENT. All rights reserved.</p>
+              <p className="animate-pulse">© 2025 CYBER FLARE - BGMI × CTF EVENT. All rights reserved.</p>
             </motion.div>
           </div>
         </footer>

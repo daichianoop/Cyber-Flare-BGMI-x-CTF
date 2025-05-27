@@ -176,38 +176,44 @@ export default function Flag2() {
 
               <div className="bg-[#090907] p-6 border-2 border-[#DE8D00] rounded-sm mb-6">
                 <h3 className="text-xl text-[#FFDE40] mb-4 font-['New_Rocker',cursive]">
+                  <p className="text-[#FFDE40] text-lg mb-2 font-['Saira',sans-serif]">
+                    Solve The 2nd Problem, and you&#39;ll unlock the second flag. This won&#39;t be straightforward—some
+                    signals hide in the noise, others in the silence.
+                  </p>
                   <motion.span
                       animate={{
                         scale: [1, 1.05, 1],
                         color: ["#FFDE40", "#FFF512", "#FFDE40"],
                       }}
-                      transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+                      transition={{duration: 3, repeat: Number.POSITIVE_INFINITY}}
                   >
-                    Riddle:
+                    Riddle (Hint for the Word):
                   </motion.span>
                 </h3>
+
                 <p className="text-gray-300 mb-4 font-['Saira',sans-serif] italic">
                   A realm confined, yet vast in scope,
-                  <br />
+                  <br/>
                   No grains of sand, but threats I probe.
-                  <br />
+                  <br/>
                   In my walls, both child and code
-                  <br />
+                  <br/>
                   Find safety where freedoms erode.
-                  <br />
+                  <br/>
                   What am I?
                 </p>
 
-                <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">Initial Clue:</h4>
-                <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm mb-4">
+                <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">Initial Clue (The Word - Encoded):</h4>
+                <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm mb-2">
                   <p className="text-[#FFF512] font-mono text-center tracking-wider">
                     000 01 10 100 1000 111 1001
                   </p>
                 </div>
                 <div className="p-3 bg-[#1A1A18] border border-[#DE8D00] rounded-sm">
                   <p className="text-[#FFDE40] font-mono text-sm font-['Saira',sans-serif]">
-                    <span className="font-bold">Decoding Hint:</span> This binary sequence doesn&#39;t use standard ASCII or
-                    UTF-8 encoding. Think of it as a direct representation of the concept.
+                    <span className="font-bold">Decoding Hint:</span> This binary sequence doesn&#39;t use standard
+                    ASCII or
+                    UTF-8 encoding. Think of it as a direct representation of the concept of a COMMUNICATION technique.
                   </p>
                 </div>
               </div>
@@ -254,7 +260,12 @@ export default function Flag2() {
                           animate={{ opacity: 1, y: 0 }}
                           className="mt-2 p-3 bg-[#090907] border border-[#DE8D00] rounded-sm text-[#FFDE40] text-sm font-['Saira',sans-serif]"
                       >
-                        Think about environments where code is executed in isolation for security purposes.
+                        For the word - Think about environments where code is executed in isolation for security purposes.<br/>
+                        For the Encoding Technique -  Listen closely to the silent chatter — in patterns, dots, and dashes scatter.<br/> <br/>
+                        <span className={"text-emerald-400"}>During World War II,secret messages were often sent using a special code using
+                          patterns of dots and dashes over radio waves. This simple and reliable method, known for its secrecy and versatility,
+                          was a key tool in military communication and helped the Allied forces succeed in many battles.
+</span>
                       </motion.div>
                   )}
                 </div>
@@ -280,15 +291,17 @@ export default function Flag2() {
                         Submit
                       </motion.button>
                   ) : (
-                      <Link href="/Tasks/no5">
+
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="bg-[#FFF512] text-[#090907] border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#EBB014] hover:shadow-[2px_2px_0px_0px_#EBB014] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 animate-pulse font-['Saira',sans-serif]"
                         >
-                          Here&#39;s a clue
+                          <Link href="https://drive.google.com/drive/folders/1vIQ15Krv0WePeCq78Kg5qzSGNpBeZBW6?usp=sharing" target={"_blank"}>
+                          Here&#39;s the Flag
+                          </Link>
                         </motion.button>
-                      </Link>
+
                   )}
                 </div>
               </form>
@@ -321,7 +334,7 @@ export default function Flag2() {
                       <Image
                           height={300}
                           width={400}
-                          src="/1.jpg"
+                          src="/flaga2.gif"
                           alt="Hint"
                           className="w-full h-auto"
                       />

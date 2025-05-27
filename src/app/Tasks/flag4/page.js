@@ -176,29 +176,32 @@ export default function Flag4() {
               </p>
 
               <div className="bg-[#090907] p-6 border-2 border-[#DE8D00] rounded-sm mb-6">
+                <p className="text-[#FFDE40] text-lg mb-2 font-['Saira',sans-serif]">
+                  Solve the fourth puzzle, and the path will unfold to your next prize. Remember, hidden within the code lies a secret “bacon” — a clever pattern of A’s and B’s waiting to be cracked.
+                </p>
                 <h3 className="text-xl text-[#FFDE40] mb-4 font-['New_Rocker',cursive]">
                   <motion.span
                       animate={{
                         scale: [1, 1.05, 1],
                         color: ["#FFDE40", "#FFF512", "#FFDE40"],
                       }}
-                      transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+                      transition={{duration: 3, repeat: Number.POSITIVE_INFINITY}}
                   >
-                    Riddle:
+                    Riddle (Hint for the Word):
                   </motion.span>
                 </h3>
                 <p className="text-gray-300 mb-4 font-['Saira',sans-serif] italic">
                   I&#39;m not built of brick or stone,
-                  <br />
+                  <br/>
                   Yet I guard your digital throne.
-                  <br />I filter traffic, block the unknown—
-                  <br />
+                  <br/>I filter traffic, block the unknown—
+                  <br/>
                   Silent, unseen, but never alone.
-                  <br />
+                  <br/>
                   What am I?
                 </p>
 
-                <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">Initial Clue:</h4>
+                <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">Initial Clue (The Word - Encoded):</h4>
                 <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm">
                   <p className="text-[#FFF512] font-mono text-center tracking-wider">
                     AABAB ABAAA BAAAB AABAA BABBA AAAAA ABABB ABABB
@@ -249,9 +252,8 @@ export default function Flag4() {
                           animate={{ opacity: 1, y: 0 }}
                           className="mt-2 p-3 bg-[#090907] border border-[#DE8D00] rounded-sm text-[#FFDE40] text-sm font-['Saira',sans-serif]"
                       >
-                        This is a Baconian cipher where A and B represent different patterns. In Bacon&#39;s original cipher,
-                        each group of 5 letters represents a single character. Try decoding the message by replacing A with
-                        0 and B with 1, then converting the binary to letters.
+                        This cipher hides messages by turning each letter into a unique pattern of five “A”s and “B”s—perfect for sneaking secrets into ordinary text.
+                        <br/> Cipher Hint - Bacon
                       </motion.div>
                   )}
                 </div>
@@ -277,15 +279,17 @@ export default function Flag4() {
                         Submit
                       </motion.button>
                   ) : (
-                      <Link href="/Tasks/no5">
+
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="bg-[#FFF512] text-[#090907] border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#EBB014] hover:shadow-[2px_2px_0px_0px_#EBB014] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 animate-pulse font-['Saira',sans-serif]"
                         >
+                          <Link href="https://drive.google.com/drive/folders/1Ww53vyBZ41A9jjJS-2PTsljsmI3KtEX-?usp=drive_link" target={"_blank"}>
                           Here&#39;s a clue
+                          </Link>
                         </motion.button>
-                      </Link>
+
                   )}
                 </div>
               </form>
@@ -318,14 +322,14 @@ export default function Flag4() {
 
                     <div className="mb-4 border-2 border-[#DE8D00] rounded-sm overflow-hidden">
                       <Image height={100} width={100}
-                          src="/1.jpg"
+                          src="/flaga4.gif"
                           alt="Hint"
                           className="w-full h-auto"
                       />
                     </div>
 
                     <p className="text-white mb-4 font-['Saira',sans-serif]">
-                      The clue is encoded in a Baconian cipher. Replace A with 0 and B with 1, then convert each 5-character group to a letter. The answer is a security device that protects networks by filtering traffic.
+                      The answer is a security device that protects networks by filtering traffic.
                     </p>
 
                     <div className="text-center">

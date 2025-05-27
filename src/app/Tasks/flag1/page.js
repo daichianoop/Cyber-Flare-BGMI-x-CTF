@@ -32,7 +32,7 @@ export default function Flag1() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (answer.toLowerCase() === "cyberpeacecorpsak05") {
+    if (answer.toLowerCase() === "admin") {
       setIsCorrect(true)
       // Success animation
       const container = containerRef.current
@@ -153,11 +153,11 @@ export default function Flag1() {
               <div className="flex justify-center mb-2">
                 <span className="text-[#FFF512] text-3xl">&#34;</span>
                 <h1 className="text-xl md:text-2xl text-white font-['New_Rocker',cursive] mx-2">
-                  The greatest threat to security is not technology; it&#39;s human error.
+                  The one who builds the system can also bring it down.
                 </h1>
                 <span className="text-[#FFF512] text-3xl">&#34;</span>
               </div>
-              <p className="text-[#FFDE40] text-sm font-['Saira',sans-serif]">- CyberFlare Security Team</p>
+              <p className="text-[#FFDE40] text-sm font-['Saira',sans-serif]">- An Anonymous Admin</p>
 
               <div className="w-full h-px bg-[#DE8D00] my-8"></div>
             </div>
@@ -182,19 +182,26 @@ export default function Flag1() {
               <p className="text-white mb-2 font-['Saira',sans-serif]">
                 <span className="text-[#FFDE40] font-bold">FLAG [1 of 5]</span>
               </p>
-              <p className="text-gray-300 mb-6 font-['Saira',sans-serif]">
+              <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">Initial Clue:</h4>
+              <p className="text-gray-300 mb-2 font-['Saira',sans-serif]">
                 Download the web activity log file below and analyze it carefully. Find the username of the person who
                 accessed the system without authorization. Enter the exact username to proceed to the next clue.
               </p>
-
-              <motion.button
-                  whileHover={{scale: 1.02, y: -2}}
-                  whileTap={{scale: 0.98}}
-                  className="bg-[#1A1A18] text-[#FFF512] border-2 border-[#DE8D00] font-bold px-6 py-3 rounded-sm shadow-[4px_4px_0px_0px_#9C4100] hover:shadow-[2px_2px_0px_0px_#9C4100] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 flex items-center justify-center mb-8 font-['Saira',sans-serif]"
-              >
-                <Download className="mr-2 h-5 w-5"/>
-                Download web_activity.log
-              </motion.button>
+              <p className=" text-[#FFDE40] mb-4 font-['Saira',sans-serif]" >
+                Look for unusual access patterns or login times that don&#39;t match normal user behavior. Check
+                for
+                failed login attempts followed by successful ones.
+              </p>
+              <a href={"https://drive.google.com/drive/folders/16S5x6dCD8X8VjytpHoOZemrMrBuAlNds?usp=drive_link"} target="_blank">
+                <motion.button
+                    whileHover={{scale: 1.02, y: -2}}
+                    whileTap={{scale: 0.98}}
+                    className="bg-[#1A1A18] text-[#FFF512] border-2 border-[#DE8D00] font-bold px-6 py-3 rounded-sm shadow-[4px_4px_0px_0px_#9C4100] hover:shadow-[2px_2px_0px_0px_#9C4100] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 flex items-center justify-center mb-8 font-['Saira',sans-serif]"
+                >
+                  <Download className="mr-2 h-5 w-5"/>
+                  View web_activity.log
+                </motion.button>
+              </a>
 
               <form onSubmit={handleSubmit}>
                 <div className="mb-6 relative">
@@ -239,9 +246,7 @@ export default function Flag1() {
                           animate={{opacity: 1, y: 0}}
                           className="mt-2 p-3 bg-[#090907] border border-[#DE8D00] rounded-sm text-[#FFDE40] text-sm font-['Saira',sans-serif]"
                       >
-                        Look for unusual access patterns or login times that don&#39;t match normal user behavior. Check
-                        for
-                        failed login attempts followed by successful ones.
+                        The one who got in didn&#39;t need a password reset—just their usual elevated privileges.
                       </motion.div>
                   )}
                 </div>
@@ -267,15 +272,18 @@ export default function Flag1() {
                         Submit
                       </motion.button>
                   ) : (
-                      <Link href="/Tasks/no2">
+
+
                         <motion.button
                             whileHover={{scale: 1.05}}
                             whileTap={{scale: 0.95}}
                             className="bg-[#FFF512] text-[#090907] border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#EBB014] hover:shadow-[2px_2px_0px_0px_#EBB014] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 animate-pulse font-['Saira',sans-serif]"
                         >
-                          Here&#39;s a clue
+                          <Link href="https://drive.google.com/drive/folders/17dP1AJBCX3BgHBWF5Td4Hgef2MOzD_QG?usp=drive_link" target={"_blank"}>
+                          Here&#39;s a clue       </Link>
                         </motion.button>
-                      </Link>
+
+
                   )}
                 </div>
               </form>
@@ -308,14 +316,14 @@ export default function Flag1() {
 
                     <div className="mb-4 border-2 border-[#DE8D00] rounded-sm overflow-hidden">
                       <Image height={100} width={100}
-                          src="/1.jpg"
+                          src="/flaga1.gif"
                           alt="Hint"
                           className="w-full h-auto"
                       />
                     </div>
 
                     <p className="text-white mb-4 font-['Saira',sans-serif]">
-                      Look more carefully at the log file. The unauthorized user might have accessed the system during unusual hours or from an unexpected location.
+                      Look more closely at the log file. The unauthorized user should appear with a series of unauthorized access attempts.
                     </p>
 
                     <div className="text-center">

@@ -1,60 +1,101 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { X } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 const teamMembers = [
   {
-    name: "Alex Chen",
-    role: "Event Director",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "Prabhanwita Satpathy",
+    role: "President",
+    image: "/Team/ps.webp",
+    socialMedia: {
+      type: "linkedin",
+      url: "https://www.linkedin.com/in/prabhanwitasatpathy?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    },
   },
   {
-    name: "Sarah Johnson",
-    role: "CTF Challenge Designer",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "Anshuman Banerjee",
+    role: "Vice President",
+    image: "/Team/ab.jpg",
+    socialMedia: {
+      type: "linkedin",
+      url: "https://www.linkedin.com/in/anshuman-banerjee-72649a245",
+    },
   },
   {
-    name: "Raj Patel",
-    role: "BGMI Tournament Manager",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "Anoop Kumar",
+    role: "Web Dev Lead",
+    image: "/Team/me.jpg",
+    socialMedia: {
+      type: "twitter",
+      url: "https://x.com/AnoopKumar62186/status/1927329266225549524",
+    },
   },
   {
-    name: "Maria Rodriguez",
-    role: "UI/UX Designer",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "Swapnil Dey",
+    role: "Cybersecurity Lead",
+    image: "/Team/sd.png",
+    socialMedia: {
+      type: "instagram",
+      url: "https://www.instagram.com/oldschool._.freak?igsh=MWVlcTIza3Mzb3BoeA==",
+    },
   },
   {
-    name: "David Kim",
-    role: "Community Manager",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "Nikita Mohapatra",
+    role: "Graphic Design Lead",
+    image: "/Team/nm.jpg",
+    socialMedia: {
+      type: "instagram",
+      url: "https://www.instagram.com/nikita_lgo",
+    },
   },
   {
-    name: "Olivia Wang",
-    role: "Marketing Lead",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "Ojasvi Goyal",
+    role: "Event Management Lead",
+    image: "/Team/og.jpg",
+    socialMedia: {
+      type: "instagram",
+      url: "https://www.instagram.com/ojasvi.goyal?igsh=NjVjNzN0aXVlZnc3",
+    },
   },
   {
-    name: "James Wilson",
-    role: "Cybersecurity Expert",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "Ritesh Kumar Mohanty",
+    role: "Event Management Lead",
+    image: "/Team/rkm.jpg",
+    socialMedia: {
+      type: "instagram",
+      url: "https://www.instagram.com/its._.ritesh_._?igsh=cG9mampndHpjM3Qw",
+    },
   },
   {
-    name: "Aisha Patel",
-    role: "QA Lead",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "Aditya Chowdhury",
+    role: "Cybersecurity Lead",
+    image: "/Team/ac.jpg",
+    socialMedia: {
+      type: "linkedin",
+      url: "https://www.linkedin.com/in/chowdhuryaditya",
+    },
   },
   {
-    name: "Michael Chang",
-    role: "Technical Director",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "Sanidhya Kamthan",
+    role: "Research and Development Lead",
+    image: "/Team/sk.jpg",
+    socialMedia: {
+      type: "instagram",
+      url: "https://www.instagram.com/im_sk_00027?igsh=MTF2ODJlazdqdWd5bA==",
+    },
   },
   {
-    name: "Emma Thompson",
-    role: "Content Creator",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "Saakshi Suyash",
+    role: "Digital Marketing Lead",
+    image: "/Team/ss.jpeg",
+    socialMedia: {
+      type: "instagram",
+      url: "https://www.instagram.com/x_saakshii_x?igsh=NnlnY24zbGxnaDJ4&utm_source=qr",
+    },
   },
 ]
 
@@ -106,7 +147,7 @@ export default function Chef() {
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.3, duration: 0.6 }}
-                  className="text-xl max-w-2xl mx-auto mb-12 text-gray-300 font-['Saira',sans-serif]"
+                  className="text-xl max-w-2xl mx-auto mb-5 text-gray-300 font-['Saira',sans-serif]"
               >
                 Meet the talented individuals behind the Cyber Flare event who work tirelessly to create the ultimate BGMI
                 × CTF experience.
@@ -115,7 +156,7 @@ export default function Chef() {
           </section>
 
           {/* Team Members Grid */}
-          <section className="py-16 bg-[#1A1A18]">
+          <section className="py-10 bg-[#1A1A18]">
             <div className="max-w-7xl mx-auto px-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {teamMembers.map((member, index) => (
@@ -151,8 +192,8 @@ export default function Chef() {
                   transition={{ delay: 0.2, duration: 0.6 }}
                   className="text-xl max-w-2xl mx-auto mb-8 text-gray-300 font-['Saira',sans-serif]"
               >
-                Passionate about gaming and cybersecurity? We&#39;re always looking for volunteers to help make our events
-                even better.
+                Passionate about cybersecurity? We&#39;re always looking for volunteers and participants to help make our
+                events even better.
               </motion.p>
               <motion.button
                   initial={{ y: 30, opacity: 0 }}
@@ -163,7 +204,7 @@ export default function Chef() {
                   whileTap={{ scale: 0.95 }}
                   className="bg-[#FFF512] text-[#090907] font-extrabold px-8 py-4 rounded-sm shadow-[6px_6px_0px_0px_#EBB014] hover:shadow-[3px_3px_0px_0px_#EBB014] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 font-['Saira',sans-serif]"
               >
-                JOIN OUR TEAM
+                <Link href={"https://chat.whatsapp.com/KLX8wnrxpYn7EJxZvE42SD"}>JOIN OUR OUTREACH GROUP</Link>
               </motion.button>
             </div>
           </section>
@@ -174,6 +215,32 @@ export default function Chef() {
 
 function TeamMemberCard({ member, index }) {
   const [isHovered, setIsHovered] = useState(false)
+
+  const getSocialIcon = (type) => {
+    switch (type) {
+      case "instagram":
+        return <Image src="/instagram.png" alt="Instagram" width={24} height={24} />
+      case "linkedin":
+        return <Image src="/linkedin.png" alt="LinkedIn" width={24} height={24} />
+      case "twitter":
+        return <Image src="/twitter.png" alt="Twitter/X" width={24} height={24} />
+      default:
+        return <X size={24} />
+    }
+  }
+
+  const getSocialHoverColor = (type) => {
+    switch (type) {
+      case "instagram":
+        return "hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500"
+      case "linkedin":
+        return "hover:bg-blue-600"
+      case "twitter":
+        return "hover:bg-white"
+      default:
+        return "hover:bg-black"
+    }
+  }
 
   return (
       <motion.div
@@ -195,35 +262,24 @@ function TeamMemberCard({ member, index }) {
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
 
-            {/* Overlay with social icons */}
-            <AnimatePresence>
-              {isHovered && (
-                  <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute inset-0 bg-[#090907]/80 flex items-center justify-center gap-4"
+            {/* Overlay with social icons - Very Fast Animation */}
+            {isHovered && (
+                <div className="absolute inset-0 bg-[#090907]/80 flex items-center justify-center gap-4">
+                  <motion.a
+                      href={member.socialMedia.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ scale: 0, rotate: -15 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ duration: 0.15, type: "tween" }}
+                      whileHover={{ scale: 1.2, rotate: 5 }}
+                      whileTap={{ scale: 0.9 }}
+                      className={`w-12 h-12 bg-[#FFF512] ${getSocialHoverColor(member.socialMedia.type)} text-[#090907] hover:text-white flex items-center justify-center rounded-sm border-2 border-[#090907] transition-all duration-100`}
                   >
-                    {[
-                      { icon: <X size={24} />, color: "hover:bg-black" },
-                    ].map((social, socialIndex) => (
-                        <motion.a
-                            key={socialIndex}
-                            href="#"
-                            initial={{ scale: 0, rotate: -30 }}
-                            animate={{ scale: 1, rotate: 0 }}
-                            transition={{ delay: socialIndex * 0.1, type: "spring" }}
-                            whileHover={{ y: -5, scale: 1.2 }}
-                            whileTap={{ scale: 0.9 }}
-                            className={`w-12 h-12 bg-[#FFF512] ${social.color} text-[#090907] flex items-center justify-center rounded-sm border-2 border-[#090907] transition-colors duration-300`}
-                        >
-                          {social.icon}
-                        </motion.a>
-                    ))}
-                  </motion.div>
-              )}
-            </AnimatePresence>
+                    {getSocialIcon(member.socialMedia.type)}
+                  </motion.a>
+                </div>
+            )}
           </div>
 
           <div className="p-4 bg-[#090907]">

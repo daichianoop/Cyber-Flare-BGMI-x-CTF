@@ -2,18 +2,21 @@
 import Image from "next/image"
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { AlertCircle, Trophy, X } from 'lucide-react'
+import { AlertCircle, Trophy, X, CheckCircle } from "lucide-react"
 
 export default function Flag5() {
-  const [answer, setAnswer] = useState("")
+  const [initialAnswer, setInitialAnswer] = useState("")
+  const [finalAnswer, setFinalAnswer] = useState("")
   const [showHint, setShowHint] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  const [isInitialCorrect, setIsInitialCorrect] = useState(false)
+  const [isFinalCorrect, setIsFinalCorrect] = useState(false)
   const [showCelebration, setShowCelebration] = useState(false)
   const [confetti, setConfetti] = useState([])
   const [randomPassword, setRandomPassword] = useState("P@ssw0rd123!")
   const [wrongAttempts, setWrongAttempts] = useState(0)
   const [showWrongMessage, setShowWrongMessage] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [showCorrectModal, setShowCorrectModal] = useState(false)
   const [shake, setShake] = useState(false)
   const containerRef = useRef(null)
 
@@ -54,25 +57,17 @@ export default function Flag5() {
     return () => clearInterval(passwordInterval)
   }, [])
 
-  const handleSubmit = (e) => {
+  const handleInitialSubmit = (e) => {
     e.preventDefault()
-    if (answer.toLowerCase() === "phishing") {
-      setIsCorrect(true)
-      setShowCelebration(true)
-      // Success animation
-      const container = containerRef.current
-      if (container) {
-        container.classList.add("success-flash")
-        setTimeout(() => {
-          container.classList.remove("success-flash")
-        }, 1000)
-      }
+    if (initialAnswer.toLowerCase() === "phishing") {
+      setIsInitialCorrect(true)
+      setShowCorrectModal(true)
     } else {
       // Wrong answer
-      setWrongAttempts(prev => prev + 1)
+      setWrongAttempts((prev) => prev + 1)
       setShowWrongMessage(true)
       setShake(true)
-      setAnswer("")
+      setInitialAnswer("")
 
       // Hide wrong message after 2 seconds
       setTimeout(() => {
@@ -91,10 +86,41 @@ export default function Flag5() {
     }
   }
 
+  const handleFinalSubmit = (e) => {
+    e.preventDefault()
+    if (finalAnswer.toLowerCase() === "ddos attack") {
+      setIsFinalCorrect(true)
+      setShowCelebration(true)
+      // Success animation
+      const container = containerRef.current
+      if (container) {
+        container.classList.add("success-flash")
+        setTimeout(() => {
+          container.classList.remove("success-flash")
+        }, 1000)
+      }
+    } else {
+      // Wrong answer for final flag
+      setShowWrongMessage(true)
+      setShake(true)
+      setFinalAnswer("")
+
+      setTimeout(() => {
+        setShowWrongMessage(false)
+      }, 2000)
+
+      setTimeout(() => {
+        setShake(false)
+      }, 500)
+    }
+  }
+
   const handleReset = () => {
-    setAnswer("")
+    setInitialAnswer("")
+    setFinalAnswer("")
     setShowHint(false)
-    setIsCorrect(false)
+    setIsInitialCorrect(false)
+    setIsFinalCorrect(false)
   }
 
   return (
@@ -135,7 +161,7 @@ export default function Flag5() {
         `}</style>
 
         <main
-            className={`min-h-screen bg-[#090907] py-10 px-4 relative overflow-hidden ${shake ? 'glitch' : ''} ${isCorrect ? 'celebration' : ''}`}
+            className={`min-h-screen bg-[#090907] py-10 px-4 relative overflow-hidden ${shake ? "glitch" : ""} ${isFinalCorrect ? "celebration" : ""}`}
             ref={containerRef}
         >
           {/* Animated Background */}
@@ -244,6 +270,10 @@ export default function Flag5() {
               </p>
 
               <div className="bg-[#090907] p-6 border-2 border-[#DE8D00] rounded-sm mb-6">
+                <p className="text-[#FFDE40] text-lg mb-2 font-['Saira',sans-serif]">
+                  Crack the riddle and submit the correct word to reveal a hidden hint. Use that hint to uncover and enter
+                  the final flag.
+                </p>
                 <h3 className="text-xl text-[#FFDE40] mb-4 font-['New_Rocker',cursive]">
                   <motion.span
                       animate={{
@@ -252,7 +282,7 @@ export default function Flag5() {
                       }}
                       transition={{ duration: 2.5, repeat: Number.POSITIVE_INFINITY }}
                   >
-                    Riddle:
+                    Riddle (Hint for the Word):
                   </motion.span>
                 </h3>
                 <p className="text-gray-300 mb-4 font-['Saira',sans-serif] italic">
@@ -264,35 +294,45 @@ export default function Flag5() {
                   What am I, the thief of peace of mind?
                 </p>
 
-
-                <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">Initial Clue:</h4>
+                <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">
+                  Initial Clue (The Word -Encoded):
+                </h4>
                 <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm mb-4">
-                  <p className="text-white font-mono text-center font-['Saira',sans-serif]">
-                    16 8 9 19 8 9 14 7
-                  </p>
+                  <p className="text-white font-mono text-center font-['Saira',sans-serif]">16 8 9 19 8 9 14 7</p>
                 </div>
 
-                <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">
-                  Still not see it? Here&#39;s another clue:
-                </h4>
-                <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm">
-                  <p className="text-[#FFF512] font-mono text-center tracking-wider">  The answer is hidden in plain sight, but sometimes we need to look at things from a different angle.</p>
+                <div className="p-3 bg-[#1A1A18] border border-[#DE8D00] rounded-sm mt-2">
+                  <p className="text-[#FFDE40] font-mono text-sm font-['Saira',sans-serif]">
+                    <span className="font-bold">Decoding Hint:</span> Remember that the words have weight and the answer
+                    isn&#39;t encrypted… it&#39;s encoded in numbers. Trust the order, follow the form, and the final flag is
+                    yours.
+                  </p>
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit}>
+              {/* Initial Clue Form */}
+              <form onSubmit={handleInitialSubmit} className="mb-8">
                 <div className="mb-6 relative">
-                  <label htmlFor="answer" className="block text-white mb-2 font-['Saira',sans-serif]">
-                    Answer:
+                  <label
+                      htmlFor="initialAnswer"
+                      className="block text-white mb-2 font-['Saira',sans-serif] text-lg font-bold"
+                  >
+                    Initial Clue:
                   </label>
                   <input
                       type="text"
-                      id="answer"
-                      value={answer}
-                      onChange={(e) => setAnswer(e.target.value)}
-                      className={`w-full p-3 bg-[#090907] border-2 ${showWrongMessage ? 'border-red-500' : 'border-[#DE8D00]'} rounded-sm text-white focus:outline-none focus:border-[#FFF512] font-['Saira',sans-serif]`}
-                      placeholder="Enter your answer"
+                      id="initialAnswer"
+                      value={initialAnswer}
+                      onChange={(e) => setInitialAnswer(e.target.value)}
+                      disabled={isInitialCorrect}
+                      className={`w-full p-3 bg-[#090907] border-2 ${showWrongMessage ? "border-red-500" : isInitialCorrect ? "border-green-500" : "border-[#DE8D00]"} rounded-sm text-white focus:outline-none focus:border-[#FFF512] font-['Saira',sans-serif] ${isInitialCorrect ? "opacity-50" : ""}`}
+                      placeholder="Enter the word from the riddle"
                   />
+                  {isInitialCorrect && (
+                      <div className="absolute right-3 top-10 text-green-500">
+                        <CheckCircle size={24} />
+                      </div>
+                  )}
 
                   {/* Wrong answer message */}
                   <AnimatePresence>
@@ -330,53 +370,247 @@ export default function Flag5() {
                   )}
                 </div>
 
-                <div className="flex justify-center gap-4 mt-8">
-                  <motion.button
-                      type="button"
-                      onClick={handleReset}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="bg-[#1A1A18] text-white border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#9C4100] hover:shadow-[2px_2px_0px_0px_#9C4100] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 font-['Saira',sans-serif]"
-                  >
-                    Reset
-                  </motion.button>
-
-                  {!isCorrect ? (
+                {!isInitialCorrect && (
+                    <div className="flex justify-center gap-4">
                       <motion.button
                           type="submit"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                           className="bg-[#1A1A18] text-white border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#9C4100] hover:shadow-[2px_2px_0px_0px_#9C4100] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 font-['Saira',sans-serif]"
                       >
-                        Submit
+                        Submit Initial Clue
                       </motion.button>
-                  ) : (
-                      <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer">
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="bg-[#FFF512] text-[#090907] border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#EBB014] hover:shadow-[2px_2px_0px_0px_#EBB014] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 animate-pulse font-['Saira',sans-serif] flex items-center"
-                        >
-                          <Trophy className="mr-2 h-5 w-5" /> SUBMIT ALL FLAGS
-                        </motion.button>
-                      </a>
-                  )}
-                </div>
+                    </div>
+                )}
               </form>
 
-              {isCorrect && (
+              {/* Final Flag Form - Only show after initial is correct */}
+              {isInitialCorrect && (
+                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+                    <div className="bg-[#090907] p-6 border-2 border-[#FFF512] rounded-sm mb-6">
+                      <h3 className="text-xl text-[#FFF512] mb-4 font-['New_Rocker',cursive]">Hidden Hint Revealed:</h3>
+                      <div
+                          className="bg-[#090907] p-6 border-2 border-[#FFF512] rounded-sm mb-6 relative overflow-hidden">
+                        {/* Animated background pattern */}
+                        <div className="absolute inset-0 opacity-5">
+                          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                            <pattern id="treasure-pattern" width="50" height="50" patternUnits="userSpaceOnUse">
+                              <circle cx="25" cy="25" r="2" fill="#FFF512"/>
+                              <path d="M25,25 L25,0 M25,25 L50,25 M25,25 L25,50 M25,25 L0,25" stroke="#FFF512"
+                                    strokeWidth="0.5"/>
+                            </pattern>
+                            <rect width="100%" height="100%" fill="url(#treasure-pattern)"/>
+                          </svg>
+                        </div>
+
+                        <motion.h3
+                            className="text-xl text-[#FFF512] mb-4 font-['New_Rocker',cursive] flex items-center"
+                            animate={{
+                              textShadow: [
+                                "0 0 0px rgba(255, 245, 18, 0)",
+                                "0 0 10px rgba(255, 245, 18, 0.8)",
+                                "0 0 0px rgba(255, 245, 18, 0)",
+                              ],
+                            }}
+                            transition={{duration: 3, repeat: Number.POSITIVE_INFINITY}}
+                        >
+                          🕵️‍♀️ TREASURE HUNT REVEALED:
+                        </motion.h3>
+
+                        <div className="relative z-10 space-y-4">
+                          <motion.p
+                              className="text-[#FFDE40] font-['Saira',sans-serif] text-lg leading-relaxed"
+                              initial={{opacity: 0, x: -20}}
+                              animate={{opacity: 1, x: 0}}
+                              transition={{delay: 0.2}}
+                          >
+                            You&#39;ve traced every trail, decoded every hint... now only one mystery remains.
+                            <br/>
+                            <span className="text-[#FFF512] font-bold">The final flag — the treasure — isn&#39;t here, but rather lies hidden in a neighbor&#39;s page.</span>
+                          </motion.p>
+
+                          <motion.div
+                              className="bg-[#1A1A18] p-4 border-l-4 border-[#DE8D00] rounded-sm"
+                              initial={{opacity: 0, y: 20}}
+                              animate={{opacity: 1, y: 0}}
+                              transition={{delay: 0.4}}
+                          >
+                            <p className="text-white font-['Saira',sans-serif] mb-2">
+                              <span className="text-[#FFF512] font-bold">🔍 SEARCH PROTOCOL:</span>
+                            </p>
+                            <p className="text-gray-300 font-['Saira',sans-serif]">
+                              Scour the neighborhood. Leave no element unturned.
+                              <br/>
+                              You&#39;re looking for the spot that marks <span
+                                className="text-[#FFF512] font-bold text-xl">&#34;X.&#34;</span>
+                            </p>
+                            <p className="text-[#FFDE40] mt-2 font-['Saira',sans-serif] italic mb-2">
+                              <span className="text-[#FFF512] font-bold">🐦 HISTORICAL DATA:</span>
+                            </p>
+                            <p className="text-gray-300 font-['Saira',sans-serif]">
+                              Once, the air was filled with tweets, a digital birdsong echoing far and wide.
+                              <br/>
+                              But now, the birds are gone… and only the <span
+                                className="text-[#FFF512] font-bold text-xl">&#34;X&#34;</span> stands where they used to sing.
+                            </p>
+                          </motion.div>
+
+                          {/* Intelligence Hint */}
+                          <motion.div
+                              className="bg-[#090907] p-4 border-2 border-[#FFF512] rounded-sm"
+                              initial={{opacity: 0, scale: 0.9}}
+                              animate={{opacity: 1, scale: 1}}
+                              transition={{delay: 0.8}}
+                              whileHover={{
+                                boxShadow: "0 0 20px rgba(255, 245, 18, 0.3)",
+                                scale: 1.02
+                              }}
+                          >
+                            <motion.p
+                                className="text-[#FFF512] font-['New_Rocker',cursive] text-lg mb-2 flex items-center justify-center"
+                                animate={{
+                                  textShadow: [
+                                    "0 0 0px rgba(255, 245, 18, 0)",
+                                    "0 0 8px rgba(255, 245, 18, 0.6)",
+                                    "0 0 0px rgba(255, 245, 18, 0)",
+                                  ],
+                                }}
+                                transition={{duration: 2.5, repeat: Number.POSITIVE_INFINITY}}
+                            >
+                              🔍 RECONNAISSANCE HINT:
+                            </motion.p>
+                            <p className="text-[#FFDE40] font-['Saira',sans-serif] text-center mb-2">
+                              You need to <span className="text-[#FFF512] font-bold">learn more about us</span> to get
+                              to the flag...
+                            </p>
+                            <motion.div
+                                animate={{x: [0, 5, 0]}}
+                                transition={{duration: 1.5, repeat: Number.POSITIVE_INFINITY}}
+                                className="text-[#DE8D00] text-center text-xl"
+                            >
+                              →
+                            </motion.div>
+                          </motion.div>
+
+                          <motion.div
+                              className="bg-[#1A1A18] p-4 border-2 border-[#FFF512] rounded-sm text-center"
+                              initial={{opacity: 0, scale: 0.9}}
+                              animate={{opacity: 1, scale: 1}}
+                              transition={{delay: 1}}
+                              whileHover={{scale: 1.02}}
+                          >
+                            <motion.p
+                                className="text-[#FFF512] font-['New_Rocker',cursive] text-lg mb-2"
+                                animate={{
+                                  scale: [1, 1.05, 1],
+                                }}
+                                transition={{duration: 2, repeat: Number.POSITIVE_INFINITY}}
+                            >
+                              🎯 FINAL DIRECTIVE:
+                            </motion.p>
+                            <p className="text-[#FFDE40] font-['Saira',sans-serif] font-bold">
+                              Find that <span className="text-[#FFF512] text-xl">&#34;X.&#34;</span> That&#39;s your mark. That&#39;s
+                              your key.
+                            </p>
+                            <p className="text-white font-['Saira',sans-serif] mt-2">
+                              And there — beneath the quiet — lies your treasure. <span
+                                className="text-[#FFF512]">🏴‍☠️</span>
+                            </p>
+                          </motion.div>
+
+                          {/* Decorative elements */}
+                          <div className="flex justify-center items-center mt-6">
+                            <div className="flex-1 h-px bg-[#DE8D00]"></div>
+                            <motion.div
+                                animate={{rotate: [0, 360]}}
+                                transition={{duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "linear"}}
+                                className="mx-4 text-[#FFF512] text-2xl"
+                            >
+                              ⚡
+                            </motion.div>
+                            <div className="flex-1 h-px bg-[#DE8D00]"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <form onSubmit={handleFinalSubmit}>
+                      <div className="mb-6 relative">
+                        <label
+                            htmlFor="finalAnswer"
+                            className="block text-white mb-2 font-['Saira',sans-serif] text-lg font-bold"
+                        >
+                          Final Flag:
+                        </label>
+                        <p className="text-gray-300 mb-2 font-['Saira',sans-serif] text-sm">
+                          Enter the final flag to complete the CTF
+                        </p>
+                        <input
+                            type="text"
+                            id="finalAnswer"
+                            value={finalAnswer}
+                            onChange={(e) => setFinalAnswer(e.target.value)}
+                            disabled={isFinalCorrect}
+                            className={`w-full p-3 bg-[#090907] border-2 ${isFinalCorrect ? "border-green-500" : "border-[#DE8D00]"} rounded-sm text-white focus:outline-none focus:border-[#FFF512] font-['Saira',sans-serif] ${isFinalCorrect ? "opacity-50" : ""}`}
+                            placeholder="Enter the final flag"
+                        />
+                        {isFinalCorrect && (
+                            <div className="absolute right-3 top-12 text-green-500">
+                              <CheckCircle size={24}/>
+                            </div>
+                        )}
+                      </div>
+
+                      <div className="flex justify-center gap-4 mt-8">
+                        <motion.button
+                            type="button"
+                            onClick={handleReset}
+                            whileHover={{scale: 1.05}}
+                            whileTap={{scale: 0.95}}
+                            className="bg-[#1A1A18] text-white border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#9C4100] hover:shadow-[2px_2px_0px_0px_#9C4100] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 font-['Saira',sans-serif]"
+                        >
+                          Reset
+                        </motion.button>
+
+                        {!isFinalCorrect ? (
+                            <motion.button
+                                type="submit"
+                                whileHover={{scale: 1.05}}
+                                whileTap={{scale: 0.95}}
+                                className="bg-[#1A1A18] text-white border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#9C4100] hover:shadow-[2px_2px_0px_0px_#9C4100] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 font-['Saira',sans-serif]"
+                            >
+                              Submit Final Flag
+                            </motion.button>
+                        ) : (
+                            <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer">
+                              <motion.button
+                                  whileHover={{scale: 1.05}}
+                                  whileTap={{scale: 0.95}}
+                                  className="bg-[#FFF512] text-[#090907] border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#EBB014] hover:shadow-[2px_2px_0px_0px_#EBB014] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 animate-pulse font-['Saira',sans-serif] flex items-center"
+                              >
+                                <Trophy className="mr-2 h-5 w-5"/> SUBMIT ALL FLAGS
+                              </motion.button>
+                            </a>
+                        )}
+                      </div>
+                    </form>
+                  </motion.div>
+              )}
+
+              {isFinalCorrect && (
                   <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      initial={{opacity: 0, y: 20}}
+                      animate={{opacity: 1, y: 0}}
                       className="mt-8 p-6 bg-[#090907] border-2 border-[#FFF512] rounded-sm text-center"
                   >
                     <h3 className="text-2xl font-bold text-[#FFF512] mb-4 font-['New_Rocker',cursive]">CONGRATULATIONS!</h3>
                     <p className="text-white mb-4 font-['Saira',sans-serif]">
-                      You&#39;ve successfully completed all 5 flags of the Cyber Flare CTF challenge! Your cybersecurity skills
-                      are impressive.
+                      You&#39;ve successfully completed all 5 flags of the Cyber Flare CTF challenge! Your cybersecurity
+                      skills are impressive.
                     </p>
                     <p className="text-[#FFDE40] mb-6 font-['Saira',sans-serif]">
-                      Please submit all the flags you&#39;ve collected in the Google Form to officially complete the challenge.
+                      Please submit all the flags you&#39;ve collected in the Google Form to officially complete the
+                      challenge.
                     </p>
 
                     <a
@@ -385,12 +619,57 @@ export default function Flag5() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center bg-[#DE8D00] text-[#090907] font-bold px-6 py-3 rounded-sm shadow-[4px_4px_0px_0px_#9C4100] hover:shadow-[2px_2px_0px_0px_#9C4100] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 font-['Saira',sans-serif]"
                     >
-                      Open Google Form <Trophy className="ml-2 h-4 w-4" />
+                      Open Google Form <Trophy className="ml-2 h-4 w-4"/>
                     </a>
                   </motion.div>
               )}
             </div>
           </div>
+
+          {/* Correct Answer Modal */}
+          <AnimatePresence>
+            {showCorrectModal && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+                >
+                  <motion.div
+                      initial={{ scale: 0.8, y: 20 }}
+                      animate={{ scale: 1, y: 0 }}
+                      exit={{ scale: 0.8, y: 20 }}
+                      className="bg-[#1A1A18] p-6 rounded-sm border-2 border-[#FFF512] max-w-md w-full relative"
+                  >
+                    <button
+                        onClick={() => setShowCorrectModal(false)}
+                        className="absolute top-2 right-2 text-white hover:text-[#FFF512]"
+                    >
+                      <X size={24} />
+                    </button>
+
+                    <div className="text-center">
+                      <CheckCircle size={48} className="text-green-500 mx-auto mb-4" />
+                      <h3 className="text-xl text-[#FFF512] mb-4 font-['New_Rocker',cursive]">Correct Answer!</h3>
+
+                      <p className="text-white mb-4 font-['Saira',sans-serif]">
+                        Great job! You&#39;ve uncovered the final flag. Find the Final answer and submit it to complete
+                        the challenge. This time there is no cipers or encryption involved. Final answer is a Test of Wits.
+                      </p>
+
+                      <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => setShowCorrectModal(false)}
+                          className="bg-[#FFF512] text-[#090907] font-bold px-6 py-2 rounded-sm"
+                      >
+                        Continue
+                      </motion.button>
+                    </div>
+                  </motion.div>
+                </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Modal after 5 wrong attempts */}
           <AnimatePresence>
@@ -417,15 +696,11 @@ export default function Flag5() {
                     <h3 className="text-xl text-[#FFF512] mb-4 font-['New_Rocker',cursive]">Need a better hint?</h3>
 
                     <div className="mb-4 border-2 border-[#DE8D00] rounded-sm overflow-hidden">
-                      <Image height={100} width={100}
-                          src="/1.jpg"
-                          alt="Hint"
-                          className="w-full h-auto"
-                      />
+                      <Image height={100} width={100} src="/flaga5.gif" alt="Hint" className="w-full h-auto" />
                     </div>
 
                     <p className="text-white mb-4 font-['Saira',sans-serif]">
-                      The numbers in the clue represent positions in the alphabet. For example, 16 is the letter &#39;P&#39;. This type of cyber attack involves deceptive emails or messages that trick users into revealing sensitive information.
+                      It is a type of cyber attack that involves deceptive emails or messages to trick users.
                     </p>
 
                     <div className="text-center">

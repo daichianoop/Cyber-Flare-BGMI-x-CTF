@@ -51,14 +51,26 @@ export default function Home() {
                   </p>
 
                   <div className="flex flex-wrap gap-4">
-                    <button
-                        className="bg-[#FFF512] text-[#090907] font-extrabold px-8 py-4 rounded-sm shadow-[6px_6px_0px_0px_#EBB014] hover:shadow-[3px_3px_0px_0px_#EBB014] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 font-['Saira',sans-serif]">
-                      REGISTER TEAM
-                    </button>
-                    <button
-                        className="bg-[#090907] border-2 border-[#FFF512] text-[#FFF512] font-extrabold px-8 py-4 rounded-sm shadow-[6px_6px_0px_0px_#EBB014] hover:shadow-[3px_3px_0px_0px_#EBB014] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 font-['Saira',sans-serif]">
-                      EVENT DETAILS
-                    </button>
+                    <Link href={"https://forms.gle/Y3URDGjK4UwhwFC98"} target={"_blank"}>
+                      <button
+                          className="bg-[#FFF512] text-[#090907] font-extrabold px-8 py-4 rounded-sm shadow-[6px_6px_0px_0px_#EBB014] hover:shadow-[3px_3px_0px_0px_#EBB014] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 font-['Saira',sans-serif]">
+                        REGISTER TEAM
+                      </button>
+                    </Link>
+
+                    <Link href={"/Terms"} target={"_blank"}>
+                      <button
+                          className="bg-[#FFF512] text-[#090907] font-extrabold px-8 py-4 rounded-sm shadow-[6px_6px_0px_0px_#EBB014] hover:shadow-[3px_3px_0px_0px_#EBB014] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 font-['Saira',sans-serif]">
+                        RULES
+                      </button>
+                    </Link>
+
+                    <Link href={"/Demo"}>
+                      <button
+                          className="bg-[#090907] border-2 border-[#FFF512] text-[#FFF512] font-extrabold px-8 py-4 rounded-sm shadow-[6px_6px_0px_0px_#EBB014] hover:shadow-[3px_3px_0px_0px_#EBB014] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 font-['Saira',sans-serif]">
+                        WATCH A DEMO
+                      </button>
+                    </Link>
                   </div>
                 </div>
 
@@ -208,7 +220,7 @@ export default function Home() {
                   <div className="relative">
                     <div className="bg-[#090907] border-4 border-[#FFF512] rounded-sm overflow-hidden shadow-[12px_12px_0px_0px_#EBB014]">
                       <Image
-                          src="/poster.webp"
+                          src="/a1.jpg"
                           alt="BGMI Tournament"
                           width={600}
                           height={600}
@@ -423,9 +435,12 @@ export default function Home() {
                   takes to capture all the flags?
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <button className="bg-[#FFF512] text-[#090907] font-extrabold px-8 py-4 rounded-sm shadow-[6px_6px_0px_0px_#EBB014] hover:shadow-[3px_3px_0px_0px_#EBB014] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 font-['Saira',sans-serif]">
-                    REGISTER NOW
-                  </button>
+                  <Link href={"https://forms.gle/Y3URDGjK4UwhwFC98"} target={"_blank"}>
+                    <button
+                        className="bg-[#FFF512] text-[#090907] font-extrabold px-8 py-4 rounded-sm shadow-[6px_6px_0px_0px_#EBB014] hover:shadow-[3px_3px_0px_0px_#EBB014] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 font-['Saira',sans-serif]">
+                      REGISTER NOW
+                    </button>
+                  </Link>
                   <Link href="/Chef">
                     <button className="bg-transparent border-2 border-[#FFF512] text-[#FFF512] font-extrabold px-8 py-4 rounded-sm shadow-[6px_6px_0px_0px_#EBB014] hover:shadow-[3px_3px_0px_0px_#EBB014] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 font-['Saira',sans-serif]">
                       MEET THE TEAM

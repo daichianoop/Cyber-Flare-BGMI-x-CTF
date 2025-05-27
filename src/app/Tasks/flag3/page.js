@@ -185,6 +185,12 @@ export default function Flag3() {
 
               <div className="bg-[#090907] p-6 border-2 border-[#DE8D00] rounded-sm mb-6">
                 <h3 className="text-xl text-[#FFDE40] mb-4 font-['New_Rocker',cursive]">
+                  <p className="text-[#FFDE40] text-lg mb-2 font-['Saira',sans-serif]">
+
+                    Crack the third challenge, and you’ll open the door to the next flag.
+                    Keep in mind that each symbol
+                    holds a key to unlock the third flag. Let&#39;s get Jumbling!!
+                  </p>
                   <motion.span
                       animate={{
                         y: [0, -5, 0],
@@ -192,22 +198,29 @@ export default function Flag3() {
                       }}
                       transition={{duration: 3, repeat: Number.POSITIVE_INFINITY}}
                   >
-                    Riddle:
+                    Riddle (Hint for the Word):
                   </motion.span>
                 </h3>
                 <p className="text-gray-300 mb-4 font-['Saira',sans-serif] italic">
-                  I&#39;m a key you can&#39;t hold or see,
-                  <br/>A secret dance of letters, numbers, three.
-                  <br/>I guard the gate to realms unknown—
-                  <br/>
-                  Fail my test, you&#39;re locked alone!
-                  <br/>
+                  I am the arbiter, cast in the server’s storm <br/>
+                  No hand, no blade, yet I bar passage with cryptic form.<br/>
+                  A labyrinth spun from letters, numbers, three.<br/>
+                  Fail my trial, and passage is locked for thee!<br/>
                   What am I?
                 </p>
 
-                <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">Initial Clue:</h4>
+                <h4 className="text-lg text-[#FFDE40] mb-2 font-['New_Rocker',cursive]">Initial Clue (The Word -Encoded):</h4>
                 <div className="p-3 bg-[#1A1A18] border border-[#FFF512] rounded-sm">
-                  <p className="text-[#FFF512] font-mono text-center tracking-wider">112 97 115 115 119 111 114 100</p>
+                  <p className="text-[#FFF512] font-mono text-center tracking-wider">115 100 97 119 111 114 112 115
+                  </p>
+                </div>
+                <div className="p-3 bg-[#1A1A18] border border-[#DE8D00] rounded-sm mt-2">
+                  <p className="text-[#FFDE40] font-mono text-sm font-['Saira',sans-serif]"><span className="font-bold">Decoding Hint:</span>
+                    This sequence represents each character as a number based on a <span className={"font-bold animate-pulse"}>universal standard</span> that
+                    computers use to translate text—think of it as the digital alphabet for letters and symbols.
+                    Note: The final word is a <span className="italic text-yellow-400">jumbled</span> version of the original.
+
+                  </p>
                 </div>
               </div>
 
@@ -254,9 +267,10 @@ export default function Flag3() {
                           animate={{opacity: 1, y: 0}}
                           className="mt-2 p-3 bg-[#090907] border border-[#DE8D00] rounded-sm text-[#FFDE40] text-sm font-['Saira',sans-serif]"
                       >
-                        The numbers in the clue are ASCII values. Convert each number to its corresponding ASCII
-                        character
-                        to reveal the answer.
+                        Unlock the cipher by aligning each numeric key to its shadowed symbol.
+                        Seek the universal chart where digits transform into letters, whispers into wo
+                        rds—a codex etched in the language of machines. What speaks in numbers when dec
+                        oded, breathes in text.
                       </motion.div>
                   )}
                 </div>
@@ -282,7 +296,7 @@ export default function Flag3() {
                         Submit
                       </motion.button>
                   ) : (
-                      <Link href="/Tasks/no4">
+                      <Link href="https://drive.google.com/drive/folders/1psmCx_EqSyuquHJC1TsOHhWcYXvG_V1g?usp=drive_link" target="_blank">
                         <motion.button
                             whileHover={{scale: 1.05}}
                             whileTap={{scale: 0.95}}
@@ -323,14 +337,14 @@ export default function Flag3() {
 
                     <div className="mb-4 border-2 border-[#DE8D00] rounded-sm overflow-hidden">
                       <Image height={100} width={100}
-                          src="/1.jpg"
+                          src="/flaga3.gif"
                           alt="Hint"
                           className="w-full h-auto"
                       />
                     </div>
 
                     <p className="text-white mb-4 font-['Saira',sans-serif]">
-                      The numbers in the clue are ASCII values. Each number represents a character. For example, 112 in ASCII is the letter &#39;p&#39;. Convert all the numbers to see what word they spell.
+                      Each number represents a character. For example, 112 is the letter &#39;p&#39;. Convert all the numbers to see what word they spell.
                     </p>
 
                     <div className="text-center">
