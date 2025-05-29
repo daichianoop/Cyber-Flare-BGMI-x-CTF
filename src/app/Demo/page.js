@@ -176,7 +176,7 @@ export default function Demo() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                 {[1, 2, 3, 4, 5].map((num) => (
-                    <Link href={`/Tasks/no${num}`} key={num}>
+                    <Link href={`/Tasks/Flag${num}`} key={num}>
                       <motion.div
                           whileHover={{ scale: 1.05, y: -5 }}
                           whileTap={{ scale: 0.95 }}
@@ -201,7 +201,7 @@ export default function Demo() {
 
               <div className="mt-8 text-center">
                 <a
-                    href="https://forms.google.com"
+                    href="https://forms.gle/ZTFzXHNW8D97X8VA6"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center bg-[#FFF512] text-[#090907] font-bold px-8 py-4 rounded-sm shadow-[6px_6px_0px_0px_#EBB014] hover:shadow-[3px_3px_0px_0px_#EBB014] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 font-['Saira',sans-serif]"
