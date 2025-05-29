@@ -176,7 +176,7 @@ export default function Demo() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                 {[1, 2, 3, 4, 5].map((num) => (
-                    <Link href={`/Tasks/Flag${num}`} key={num}>
+                    <Link href={`/Tasks/flag${num}`} key={num}>
                       <motion.div
                           whileHover={{ scale: 1.05, y: -5 }}
                           whileTap={{ scale: 0.95 }}
