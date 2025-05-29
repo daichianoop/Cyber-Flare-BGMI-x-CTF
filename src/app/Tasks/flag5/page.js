@@ -582,7 +582,7 @@ export default function Flag5() {
                               Submit Final Flag
                             </motion.button>
                         ) : (
-                            <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer">
+                            <a href="https://forms.gle/ZTFzXHNW8D97X8VA6" target="_blank" rel="noopener noreferrer">
                               <motion.button
                                   whileHover={{scale: 1.05}}
                                   whileTap={{scale: 0.95}}
