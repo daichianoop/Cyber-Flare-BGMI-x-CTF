@@ -130,31 +130,31 @@ export default function Navbar() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/Locked" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
+                  <Link href="/Task/flag1" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
                     Flag 1
                     <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-[#FFF512] group-hover:w-full transition-all duration-300 block" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/Locked" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
+                  <Link href="/Task/flag2" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
                     Flag 2
                     <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-[#FFF512] group-hover:w-full transition-all duration-300 block" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/Locked" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
+                  <Link href="/Task/flag3" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
                     Flag 3
                     <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-[#FFF512] group-hover:w-full transition-all duration-300 block" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/Locked" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
+                  <Link href="/Task/flag4" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
                     Flag 4
                     <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-[#FFF512] group-hover:w-full transition-all duration-300 block" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/Locked" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
+                  <Link href="/Task/flag5" className="text-sm font-bold uppercase hover:text-[#FFF512] relative group">
                     Flag 5
                     <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-[#FFF512] group-hover:w-full transition-all duration-300 block" />
                   </Link>
@@ -211,27 +211,27 @@ export default function Navbar() {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/Locked" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
+                      <Link href="/Task/flag1" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
                         Flag 1
                       </Link>
                     </li>
                     <li>
-                      <Link href="/Locked" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
+                      <Link href="/Task/flag2" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
                         Flag 2
                       </Link>
                     </li>
                     <li>
-                      <Link href="/Locked" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
+                      <Link href="/Task/flag3" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
                         Flag 3
                       </Link>
                     </li>
                     <li>
-                      <Link href="/Locked" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
+                      <Link href="/Task/flag4" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
                         Flag 4
                       </Link>
                     </li>
                     <li>
-                      <Link href="/Locked" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
+                      <Link href="/Task/flag5" className="block text-sm font-bold uppercase text-white hover:text-[#FFF512]">
                         Flag 5
                       </Link>
                     </li>
