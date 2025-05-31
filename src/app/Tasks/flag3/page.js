@@ -296,15 +296,16 @@ export default function Flag3() {
                         Submit
                       </motion.button>
                   ) : (
-                      <Link href="https://drive.google.com/drive/folders/1psmCx_EqSyuquHJC1TsOHhWcYXvG_V1g?usp=drive_link" target="_blank">
                         <motion.button
                             whileHover={{scale: 1.05}}
                             whileTap={{scale: 0.95}}
                             className="bg-[#FFF512] text-[#090907] border-2 border-[#DE8D00] font-bold px-8 py-3 rounded-sm shadow-[4px_4px_0px_0px_#EBB014] hover:shadow-[2px_2px_0px_0px_#EBB014] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 animate-pulse font-['Saira',sans-serif]"
                         >
-                          Here&#39;s a clue
+                          <Link href="https://drive.google.com/drive/folders/1psmCx_EqSyuquHJC1TsOHhWcYXvG_V1g?usp=drive_link" target="_blank">
+                            Here&#39;s a clue
+                          </Link>
                         </motion.button>
-                      </Link>
+                    
                   )}
                 </div>
               </form>
